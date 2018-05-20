@@ -61,7 +61,8 @@
         * static 调用非静态方法:相当于在father 中调用son的ta私有方法 不能访问 因此最后一行报错
         * static 转发和非转发调用:利用类名不会被转发,self,parent,static均会转发直到找到一个具体的类为止
         * $this->ta() 中$this是object(son),但是由于ta是private方法,在father中不可见,于是调用的是father中的ta()
-        * [referance](http://php.net/manual/zh/language.oop5.late-static-bindings.php)
+
+[reference](http://php.net/manual/zh/language.oop5.late-static-bindings.php/)
 
 
 ## Callback 类型
@@ -107,7 +108,8 @@
         * 静态方法的传递: 1使用字符串 2使用array 3可使用call_user_func(array('B','parent::methodname'))
         * 成员方法的传递: 使用array($obj,str $method)
         * 闭包传递:直接传闭包
-        * [referance](http://php.net/manual/zh/language.types.callable.php)
+
+[reference](http://php.net/manual/zh/language.types.callable.php/)
 
 
 ## Closure 闭包
@@ -161,7 +163,8 @@
         * 参数意思: 1 closure 表示传入一个闭包 ,2 $newthis 这个闭包绑定在那个对象上面(可以为null) 3 $scope闭包的作用域,不传为'static'表示当前环境,new A() 和 'A' 和A::class 意思一样表示在A里面
         * $c1 ,$c2 : 因为$f1中使用了$_m1是私有变量,因此在第三参数需要在A里面,所以$c1,$c2的第三参数不同
         * $c3,$4,$5 :由于是静态调用,因此第二个参数可以为null,而c3,c4中使用了self和static,所以需要指定$scope来指明谁是self和static,而$f5中A::$m3在外部也可以调用,因此第三个参数为'static',如果是A::$_m4则不能调用成功
-        * [参考](http://php.net/manual/zh/closure.bind.php)
+
+[reference](http://php.net/manual/zh/closure.bind.php/)
 
 ## spl_autoload
 
@@ -183,5 +186,6 @@
 
         * new 一个对象的时候 会先调用spl_autolad_register中注册的函数,最后找不到报了个错误
 
+[reference](http://php.net/manual/zh/function.spl-autoload.php/)
 
 ## Reflection
