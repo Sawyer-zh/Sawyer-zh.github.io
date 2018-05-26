@@ -1,4 +1,10 @@
 # php中一些概念
+### 目录
+* [static后期静态绑定](./一些php的概念.md#static-后期静态绑定/)
+* [Callback类型介绍](./一些php的概念.md#callback-类型/)
+* [Closure闭包](./一些php的概念.md#closure-闭包/)
+* [spl_autoload](./一些php的概念.md#spl_autoload/)
+* [Reflection](./一些php的概念.md#reflection/)
 
 ### static 后期静态绑定
 * 1.$this,self,static,parent 的一个例子 ,php手册里面例子也非常棒
