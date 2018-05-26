@@ -8,54 +8,56 @@
 
 ### static 后期静态绑定
 * 1.$this,self,static,parent 的一个例子 ,php手册里面例子也非常棒
-      
-        <?php
-        class GrandPa{
-        
-            private function ta(){
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        
-            public static function tb(){
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        }
-        
-        class Father extends GrandPa{
-        
-            public function test(){
-                $this->ta();
-                static::tb();
-                self::tb();
-                parent::tb();
-                static->ta();
-            }
-        
-            private function ta(){
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        
-            public static function tb(){
-        
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        
-        }
-        
-        class Son extends Father{
-        
-            private function ta(){
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        
-            public static function tb(){
-                echo __METHOD__ . str_repeat(" ", 5);
-            }
-        }
-        
-        
-        $obj = new Son();
-        $obj->test();
+
+```php
+<?php
+class GrandPa{
+
+    private function ta(){
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+
+    public static function tb(){
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+}
+
+class Father extends GrandPa{
+
+    public function test(){
+        $this->ta();
+        static::tb();
+        self::tb();
+        parent::tb();
+        static->ta();
+    }
+
+    private function ta(){
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+
+    public static function tb(){
+
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+
+}
+
+class Son extends Father{
+
+    private function ta(){
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+
+    public static function tb(){
+        echo __METHOD__ . str_repeat(" ", 5);
+    }
+}
+
+
+$obj = new Son();
+$obj->test();
+```
 
 * 输出:
 
@@ -77,37 +79,39 @@
 ### Callback 类型
 * 1.栗子
 
-        <?php
-        function my_callback_function(){
-            echo __FUNCTION__;
-        }
-        
-        class MyClass{
-        
-            static function myCallbackMethod(){
-                echo __METHOD__;
-            }
-        
-            public function __invoke($echo ){
-                echo $echo;
-            }
-        }
-        
-        $fun = function($echo){
-            echo $echo;
-        };
-        #1
-        call_user_func('my_callback_function');
-        #2
-        call_user_func(array(MyClass::class,'myCallbackMethod'));
-        call_user_func(array('MyClass','myCallbackMethod'));
-        call_user_func('MyClass::myCallbackMethod');
-        #3
-        $obj = new MyClass();
-        call_user_func(array($obj,'myCallbackMethod'));
-        call_user_func($obj,'__invoke');
-        #4
-        call_user_func($fun,"hello ");
+```php
+<?php
+function my_callback_function(){
+    echo __FUNCTION__;
+}
+
+class MyClass{
+
+    static function myCallbackMethod(){
+        echo __METHOD__;
+    }
+
+    public function __invoke($echo ){
+        echo $echo;
+    }
+}
+
+$fun = function($echo){
+    echo $echo;
+};
+#1
+call_user_func('my_callback_function');
+#2
+call_user_func(array(MyClass::class,'myCallbackMethod'));
+call_user_func(array('MyClass','myCallbackMethod'));
+call_user_func('MyClass::myCallbackMethod');
+#3
+$obj = new MyClass();
+call_user_func(array($obj,'myCallbackMethod'));
+call_user_func($obj,'__invoke');
+#4
+call_user_func($fun,"hello ");
+```
 
 * 输出:
 
@@ -133,46 +137,47 @@
 
 * 1.Closure::bind($closure,$newObj [, $scope = 'static']);        
 
+```php
+<?php       
+class A{
+    private $_m1 = 'm1';
+    public $m2 = 'm2';
+    public static $m3 = 'm3';
+    private static $_m4 = 'm4';
+}
 
-        <?php       
-        class A{
-            private $_m1 = 'm1';
-            public $m2 = 'm2';
-            public static $m3 = 'm3';
-            private static $_m4 = 'm4';
-        }
-        
-        $f1 = function(){
-            var_dump($this->_m1);
-        };
-        
-        $f2 = function(){
-            var_dump($this->m2);
-        };
-        
-        $f3 = function(){
-            var_dump(self::$m3);
-        };
-        
-        $f4 = function(){
-            var_dump(static::$_m4);
-        };
-        
-        $f5 = function(){
-            var_dump('hello');
-            var_dump(A::$m3);
-        };
-        
-        $c1 = Closure::bind($f1,new A(),A::class);
-        $c2 = Closure::bind($f2,new A());
-        $c3 = Closure::bind($f3,new A(),A::class);
-        $c4 = Closure::bind($f4,null,new A);
-        $c5 = Closure::bind($f5,null);
-        $c1();
-        call_user_func($c2);
-        $c3();
-        call_user_func($c4);
-        $c5();
+$f1 = function(){
+    var_dump($this->_m1);
+};
+
+$f2 = function(){
+    var_dump($this->m2);
+};
+
+$f3 = function(){
+    var_dump(self::$m3);
+};
+
+$f4 = function(){
+    var_dump(static::$_m4);
+};
+
+$f5 = function(){
+    var_dump('hello');
+    var_dump(A::$m3);
+};
+
+$c1 = Closure::bind($f1,new A(),A::class);
+$c2 = Closure::bind($f2,new A());
+$c3 = Closure::bind($f3,new A(),A::class);
+$c4 = Closure::bind($f4,null,new A);
+$c5 = Closure::bind($f5,null);
+$c1();
+call_user_func($c2);
+$c3();
+call_user_func($c4);
+$c5();
+```
 
 * 输出:
 
@@ -192,16 +197,16 @@
 
 ### spl_autoload
 * 1.例子
-
-        <?php
-        function my_autoload($class){
-            var_dump($class);
-            var_dump("my_autoload");
-        }
-        $ret = spl_autoload_register('my_autoload');
-        var_dump(spl_autoload_functions());
-        $a = new DDD();
-
+```php
+<?php
+function my_autoload($class){
+    var_dump($class);
+    var_dump("my_autoload");
+}
+$ret = spl_autoload_register('my_autoload');
+var_dump(spl_autoload_functions());
+$a = new DDD();
+```
 
 * 输出:
 
@@ -216,45 +221,47 @@
 ## Reflection
 
 * 1.先看一些例子 大致了ReflectionClass , ReflectionMethod ,ReflectionParams 等等
-        
-        <?php
-        
-        class A{
-            public function __construct(B $b , C $c){
-        
-            }
-        }
-        
-        class B{
-        
-        }
-        
-        class C{
-            public function __construct(D $d){
-        
-            }
-        }
-        
-        class D{
-        
-        }
-        
-        #reflectionclass 
-        $class = new ReflectionClass(A::class);
-        var_dump($class);
-        
-        #reflectionmethod 不存在构造方法返回null 本身没有但是父类有也算有
-        $constructor = $class->getConstructor();
-        var_dump($constructor);
-        
-        #reflectionparams 组成的array
-        $params = $constructor->getParameters();
-        
-        var_dump($params);
-        
-        foreach ($params as $param) {
-            var_dump($param->getClass());
-        }
+
+```php     
+<?php
+
+class A{
+    public function __construct(B $b , C $c){
+
+    }
+}
+
+class B{
+
+}
+
+class C{
+    public function __construct(D $d){
+
+    }
+}
+
+class D{
+
+}
+
+#reflectionclass 
+$class = new ReflectionClass(A::class);
+var_dump($class);
+
+#reflectionmethod 不存在构造方法返回null 本身没有但是父类有也算有
+$constructor = $class->getConstructor();
+var_dump($constructor);
+
+#reflectionparams 组成的array
+$params = $constructor->getParameters();
+
+var_dump($params);
+
+foreach ($params as $param) {
+    var_dump($param->getClass());
+}
+```
 
 * 输出:
 
@@ -267,39 +274,41 @@
 
 * 2.再看一个厉害一点的例子
 
-        class Build{
+```php
+class Build{
+
+    protected $buildStack = [];
+    protected $with = [];
+
+    public function make($class){
         
-            protected $buildStack = [];
-            protected $with = [];
+        $this->buildStack[] = $class;
         
-            public function make($class){
-                
-                $this->buildStack[] = $class;
-                
-                $reflectionCalss = new ReflectionClass($class);
-                
-                $constructor = $reflectionCalss->getConstructor();
-                #递归终点
-                if (is_null($constructor)) {
-                   array_pop($this->buildStack);
-                   return $reflectionCalss->newInstance();
-                }
-                #处理递归
-                $params = $constructor->getParameters();
+        $reflectionCalss = new ReflectionClass($class);
         
-                foreach ($params as $param) {
-                    $this->with[$class][] = $this->make($param->getClass()->name);
-                }
-                
-                $args = array_pop($this->with);
-                
-                return $reflectionCalss->newInstanceArgs($args);
-            }
+        $constructor = $reflectionCalss->getConstructor();
+        #递归终点
+        if (is_null($constructor)) {
+           array_pop($this->buildStack);
+           return $reflectionCalss->newInstance();
+        }
+        #处理递归
+        $params = $constructor->getParameters();
+
+        foreach ($params as $param) {
+            $this->with[$class][] = $this->make($param->getClass()->name);
         }
         
-        $build = new Build;
+        $args = array_pop($this->with);
         
-        var_dump($build->make(A::class));
+        return $reflectionCalss->newInstanceArgs($args);
+    }
+}
+
+$build = new Build;
+
+var_dump($build->make(A::class));
+```
 
 * 输出:
 
