@@ -60,12 +60,12 @@ $obj->test();
 ```
 
 * 输出:
-
-        Father::ta 
-        Son::tb 
-        Father::tb 
-        GrandPa::tb  
-
+```php
+Father::ta 
+Son::tb 
+Father::tb 
+GrandPa::tb  
+```
 * 2.结论:
         
   * a.static 调用静态方法:调用者对应的类的静态方法, self是自己,parent是父亲
@@ -114,15 +114,15 @@ call_user_func($fun,"hello ");
 ```
 
 * 输出:
-
-        my_callback_function
-        MyClass::myCallbackMethod
-        MyClass::myCallbackMethod
-        MyClass::myCallbackMethod
-        MyClass::myCallbackMethod
-        __invoke
-        hello
-
+```php
+my_callback_function
+MyClass::myCallbackMethod
+MyClass::myCallbackMethod
+MyClass::myCallbackMethod
+MyClass::myCallbackMethod
+__invoke
+hello
+```
 * 2.结论:
 
   * a.传递函数:传函数的名字字符串
@@ -180,14 +180,14 @@ $c5();
 ```
 
 * 输出:
-
-        string(2) "m1" 
-        string(2) "m2" 
-        string(2) "m3" 
-        string(2) "m4" 
-        string(5) "hello"
-        string(2) "m3"
-
+```php
+string(2) "m1" 
+string(2) "m2" 
+string(2) "m3" 
+string(2) "m4" 
+string(5) "hello"
+string(2) "m3"
+```
 * 2.结论:
 
   * a.参数意思: 1 closure 表示传入一个闭包 ,2 $newthis 这个闭包绑定在那个对象上面(可以为null) 3 $scope闭包的作用域,不传为'static'表示当前环境,new A() 和 'A' 和A::class 意思一样表示在A里面
@@ -209,9 +209,9 @@ $a = new DDD();
 ```
 
 * 输出:
-
-        array(1) { [0]=> string(11) "my_autoload" } string(3) "DDD" string(11) "my_autoload"
-
+```php
+array(1) { [0]=> string(11) "my_autoload" } string(3) "DDD" string(11) "my_autoload"
+```php
 * 2.结论:
 
   * a.new 一个对象的时候 会先调用spl_autolad_register中注册的函数,最后找不到报了个错误
@@ -264,13 +264,13 @@ foreach ($params as $param) {
 ```
 
 * 输出:
-
-        object(ReflectionClass)#1 (1) { ["name"]=> string(1) "A" } 
-        object(ReflectionMethod)#2 (2) { ["name"]=> string(11) "__construct" ["class"]=> string(1) "A" } 
-        array(2) { [0]=> object(ReflectionParameter)#3 (1) { ["name"]=> string(1) "b" } [1]=> object(ReflectionParameter)#4 (1) { ["name"]=> string(1) "c" } } 
-        object(ReflectionClass)#5 (1) { ["name"]=> string(1) "B" }
-        object(ReflectionClass)#5 (1) { ["name"]=> string(1) "C" }
-
+```php
+object(ReflectionClass)#1 (1) { ["name"]=> string(1) "A" } 
+object(ReflectionMethod)#2 (2) { ["name"]=> string(11) "__construct" ["class"]=> string(1) "A" } 
+array(2) { [0]=> object(ReflectionParameter)#3 (1) { ["name"]=> string(1) "b" } [1]=> object(ReflectionParameter)#4 (1) { ["name"]=> string(1) "c" } } 
+object(ReflectionClass)#5 (1) { ["name"]=> string(1) "B" }
+object(ReflectionClass)#5 (1) { ["name"]=> string(1) "C" }
+```
 
 * 2.再看一个厉害一点的例子
 
@@ -311,9 +311,9 @@ var_dump($build->make(A::class));
 ```
 
 * 输出:
-
-        object(A)#11 (0) { }
-
+```php
+object(A)#11 (0) { }
+```
 * 3说明:
             
   * a.正常实例化A需要实例话B,C,而实例化C之前需要实例化D... 等等! 这个只是个简单的例子,实际中的情况更复杂...一个依赖另外一个.所以我们需要简单的方式来实例化A
