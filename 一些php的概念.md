@@ -51,7 +51,7 @@
         $obj = new Son();
         $obj->test();
 
-输出:
+* 输出:
 
         Father::ta 
         Son::tb 
@@ -103,7 +103,7 @@
         #4
         call_user_func($fun,"hello ");
 
-输出:
+* 输出:
 
         my_callback_function
         MyClass::myCallbackMethod
@@ -168,7 +168,7 @@
         call_user_func($c4);
         $c5();
 
-输出:
+* 输出:
 
         string(2) "m1" 
         string(2) "m2" 
@@ -197,7 +197,7 @@
         $a = new DDD();
 
 
-输出:
+* 输出:
 
         array(1) { [0]=> string(11) "my_autoload" } string(3) "DDD" string(11) "my_autoload"
 
@@ -250,7 +250,7 @@
             var_dump($param->getClass());
         }
 
-输出:
+* 输出:
 
         object(ReflectionClass)#1 (1) { ["name"]=> string(1) "A" } 
         object(ReflectionMethod)#2 (2) { ["name"]=> string(11) "__construct" ["class"]=> string(1) "A" } 
@@ -295,7 +295,7 @@
         
         var_dump($build->make(A::class));
 
-输出:
+* 输出:
 
         object(A)#11 (0) { }
 
