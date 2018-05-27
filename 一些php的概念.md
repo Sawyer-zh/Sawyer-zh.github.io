@@ -211,7 +211,7 @@ $a = new DDD();
 * 输出:
 ```php
 array(1) { [0]=> string(11) "my_autoload" } string(3) "DDD" string(11) "my_autoload"
-```php
+```
 * 2.结论:
 
   * a.new 一个对象的时候 会先调用spl_autolad_register中注册的函数,最后找不到报了个错误
