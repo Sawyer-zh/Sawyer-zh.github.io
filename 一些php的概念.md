@@ -29,7 +29,7 @@ class Father extends GrandPa{
         static::tb();
         self::tb();
         parent::tb();
-        static->ta();
+        static::ta();
     }
 
     private function ta(){
