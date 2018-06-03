@@ -161,6 +161,7 @@ while (1) {
 * fseek(handle, offset)
 * fclose(handle)
 * filesize(filename)
+
 [reference](http://php.net/manual/zh/function.fopen.php/)
 
 #### 多进程中的文件操作
