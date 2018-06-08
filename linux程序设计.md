@@ -18,13 +18,15 @@
   * $1,$2,...:脚本程序的参数
   * $*:列出所有参数,使用环境变量中的IFS
   * $@:$*的变体,即使IFS为空,参数也不会挤在一起
+
 #### 条件
 test / [ 命令   
 如果把then 和if 放在同一行必须用;把test语句和then分隔开
  * 字符串比较
  * 算数比较
  * 文件条件测试
- #### 控制结构
+
+#### 控制结构
  * if ... then ... elif ... then ... else ... fi
  * for ... in ... do ... done
  * while ... do ... done
@@ -32,11 +34,39 @@ test / [ 命令
  * 命令列表
     * AND && 前面的命令执行成功的情况下,才执行后面的命令
     * OR || 前面一条命令执行失败才执行后面的命令
+
 #### 函数
  声明:fun_name(){}
  调用:fun_name
- #### 命令
+
+#### 命令
  * break
  * :
  * continue
- 
+ * .
+ * echo
+ * eval
+ * exec
+ * exit n
+ * export
+ * expr
+ * printf
+ * return
+ * set
+ * shift
+ * trap
+ * unset
+ * find
+ * grep
+
+#### 命令的执行
+ * 算数扩展 : $(())
+ * 参数扩展 : ${param:-default} ...
+
+#### here 文档
+ * << !xxx!
+
+#### 调试
+ * sh -n/v/x/u
+
+### 
