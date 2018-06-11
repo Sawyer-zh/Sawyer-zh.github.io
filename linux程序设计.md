@@ -69,4 +69,145 @@ test / [ 命令
 #### 调试
  * sh -n/v/x/u
 
-### 
+### 文件操作
+
+#### 文件和设备
+* /dev/console
+* /dev/tty
+* /dev/null
+
+#### 系统调用和库函数
+ * 系统调用:由系统直接提供直接对文件和设备的访问和控制的底层函数
+ * 库函数:对设备和磁盘文件提供更高层的接口
+ 
+![各种文件函数与用户,设备驱动程序,内核和硬件的关系](img/3-2.png/)
+
+#### 底层文件访问
+一些系统调用
+ * write
+ * read
+ * open 
+ * close 
+ * ioctl
+ * lseek
+ * fstat, stat, lstst
+ * dup, dup2
+
+#### 标准IO库
+ * fopen,fclose
+ * fread,fwrite
+ * fflush
+ * fseek
+ * fgetc, getc, getchar
+ * fputc, putc, putchar
+ * fgets, gets
+ * printf, fprintf, sprintf
+ * scanf, fscanf, sscanf
+
+#### 文件和目录维护
+ * chmod
+ * chown
+ * unlink, link, symlink
+ * mkdir, rmdir
+ * chdir
+
+#### 扫描目录
+ * opendir
+ * readdir
+ * telldir
+ * seekdir
+ * closedir
+
+#### 错误处理
+ * strerror
+ * perror
+
+#### /proc 文件系统
+包含了许多特殊文件用来对驱动程序和内核信息进行更高层的访问
+
+### Linux 环境
+#### 向程序传递参数
+* getopt
+* getopt_long
+
+#### 环境变量
+ * 用途: 采用环境变量改变程序运行方式,类似全局变量
+ * environ变量: 通过这个变量访问字符串数组
+
+#### 时间和日期
+ * time, difftime, gmttime, localtime, mktime, asctime, ctime, strftime, strptime
+
+#### 临时文件
+ * tmpnam, tmpfile
+
+###  数据管理
+
+#### 内存管理
+ * 简单的内存分配:malloc
+ * 分配大量内存: 交换空间
+ * 滥用内存: segmentation error
+ * 空指针: segmentation error
+ * 释放内存: free
+
+#### 文件锁定
+ * 创建锁文件
+ * 区域锁定
+   * 共享(读)锁:有共享锁时,不能获得独占锁
+   * 解锁:
+   * 独占(写)锁:有独占锁时,不能有其他锁
+
+### 进程和信号
+
+#### 进程的结构,类型和调度
+ * 进程的结构:有自己的栈空间,保存局部变量和函数的调用和返回,有自己的环境空间,包含为这个进程建立的环境变量.
+   * 进程表
+   * 查看进程 ps a/f/x/e/u    PID/PPID/TTY/CMD/STAT/
+   * 系统进程 
+   * 进程调度 nice
+ * 启动新进程:
+   * system : 程序必须等待由system函数启动的进程结束之后才能继续
+   * 替换进程映像 exec: 把当前进程替换为一个新的进程,原来的进程不再执行
+   * 复制进程映像 fork:父进程返回子进程pid,子进程返回0 这样可以区分两个进程
+ * 等待一个进程 wait: 父进程中调用wait
+ * 僵尸进程: 子进程运行结束 ,由于需要保存返回给父进程的信息所以依然存在系统中.这个时候就是僵尸进程,知道父进程调用wati 或者正常结束
+ * 线程: 进程可以相互协作,互相发送消息,互相中断,甚至可以共享内存段.但是想要共享变量不太可能.于是有了线程
+
+#### 信号
+信号是UNIX/LINUX 系统响应某些条件而产生的一个事件.用raise/生成表示一个信号的产生,用catch/捕获表示接收一个信号
+ * SIG... 
+ * 发送信号: kill
+
+### POSIX线程
+
+#### 在进程中创建新线程
+ * pthread_create : 类似于进程中的fork
+ * pthread_exit: 类似于exit
+ * pthread_join: 类似于pthread_wait
+
+#### 在一个进程中同步线程之间的数据访问
+ * 信号量:他的作用如同看守一段代码的看门人
+   * sem_init
+   * sem_wait
+   * sem_post
+   * sem_destroy
+ * 互斥量: 他的作用如同保护代码的一个互斥设备
+   * pthread_mutex_init
+   * pthread_mutex_lock
+   * pthread_mutex_unlock
+   * pthread_mutex_destroy
+
+#### 线程的属性
+#### 取消一个线程
+ * pthread_cancel
+
+### 进程间通信:管道
+#### 管道
+从一个进程连接数据流到另外一个进程时
+#### 进程管道
+ * popen
+ * pclose
+
+#### pipe调用
+ * pipe(int file_descriptor[2])   向file_descriptor[1]中写数据 从file_descriptor[0]中读数据
+ 
+
