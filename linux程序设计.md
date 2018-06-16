@@ -244,6 +244,6 @@ test / [ 命令
      * 套接字属性
          * 域domain  最常见的是AF_INET 指的是internet 底层协议为IP协议
          * 类型
-             * 流套接字SOCK_STREAM 底层有TCP/IP实现
+             * 流套接字SOCK_STREAM 底层由TCP/IP实现
              * 数据报套接字 SOCK_DGRAM UDP/IP实现
              * 套接字协议
