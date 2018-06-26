@@ -5,6 +5,8 @@
 * [Closure闭包](./一些php的概念.md#closure-闭包/)
 * [spl_autoload](./一些php的概念.md#spl_autoload/)
 * [Reflection](./一些php的概念.md#reflection/)
+* [declare](./一些php的概念.md#declare/)
+
 
 ### static 后期静态绑定
 * 1.$this,self,static,parent 的一个例子 ,php手册里面例子也非常棒
@@ -324,4 +326,97 @@ object(A)#11 (0) { }
 
 * 4.[reference](http://php.net/manual/zh/class.reflectionclass.php/)
 
+## declare
+
+有三个地方用到了declare语句:ticks, encoding, strict  
+
+* 1.ticks(时钟周期):
+    * 在declare代码段中解释器每执行N(用declare(ticks=N)指定)条可计时的低级语言就会发生的事件.事件有register_tick_function()来指定 . 
+```php
+<?php
+
+declare(ticks=1);
+
+// A function called on each tick event
+function tick_handler()
+{
+    echo "tick_handler() called\n";
+}
+
+register_tick_function('tick_handler');
+
+$a = 1;
+
+if ($a > 0) {
+    $a += 2;
+    print($a);
+}
+```
+    * 用来检查pcntl_signal()使用ticks作为信号处理的回调机制
+```php
+<?php
+//使用ticks需要PHP 4.3.0以上版本
+declare(ticks = 1);
+
+//信号处理函数
+function sig_handler($signo)
+{
+
+     switch ($signo) {
+         case SIGTERM:
+             // 处理SIGTERM信号
+             exit;
+             break;
+         case SIGHUP:
+             //处理SIGHUP信号
+             break;
+         case SIGUSR1:
+             echo "Caught SIGUSR1...\n";
+             break;
+         default:
+             // 处理所有其他信号
+     }
+
+}
+
+echo "Installing signal handler...\n";
+
+//安装信号处理器
+pcntl_signal(SIGTERM, "sig_handler");
+pcntl_signal(SIGHUP,  "sig_handler");
+pcntl_signal(SIGUSR1, "sig_handler");
+
+// 或者在PHP 4.3.0以上版本可以使用对象方法
+// pcntl_signal(SIGUSR1, array($obj, "do_something");
+
+echo "Generating signal SIGTERM to self...\n";
+
+//向当前进程发送SIGUSR1信号
+posix_kill(posix_getpid(), SIGUSR1);
+
+echo "Done\n"
+```
+
+ * 2.encoding: 用encoding指令来对每段脚本指定其编码方式
+```php
+<?php
+declare(encoding='ISO-8859-1');
+// code here
+?>
+```
+ * 3.strict:用于strict_types
+```php
+<?php
+declare(strict_types=1);
+
+function sum(int $a, int $b) {
+    return $a + $b;
+}
+
+var_dump(sum(1, 2));
+var_dump(sum(1.5, 2.5)); //Uncaught TypeError
+?>
+```
+
+ * 4.[reference](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict/)
 
