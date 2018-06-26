@@ -7,6 +7,7 @@
 * [Reflection](./一些php的概念.md#reflection/)
 * [declare](./一些php的概念.md#declare/)
 * [pcntl](./一些php的概念.md#pcntl/)
+* [posix](./一些php的概念.md#posix/)
 
 
 ### static 后期静态绑定
@@ -450,3 +451,14 @@ if ($ret == -1) {
 }
 ```
  * 4.[reference](http://php.net/manual/zh/ref.pcntl.php/)
+
+
+ ### posix
+ This module contains an interface to those functions defined in the IEEE 1003.1 (POSIX.1) standards document which are not accessible through other means.
+  * 1.注意事项. 
+    * windows 下不能用
+  * 2.常用函数
+    * posix_getpid()
+    * posix_kill()
+    * posix_mkfifo()
+  * 3.[reference](http://php.net/manual/zh/book.posix.php/)
