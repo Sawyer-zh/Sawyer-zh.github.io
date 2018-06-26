@@ -6,6 +6,7 @@
 * [spl_autoload](./一些php的概念.md#spl_autoload/)
 * [Reflection](./一些php的概念.md#reflection/)
 * [declare](./一些php的概念.md#declare/)
+* [pcntl](./一些php的概念.md#pcntl/)
 
 
 ### static 后期静态绑定
@@ -220,7 +221,7 @@ array(1) { [0]=> string(11) "my_autoload" } string(3) "DDD" string(11) "my_autol
 
 * 3.[reference](http://php.net/manual/zh/function.spl-autoload.php/)
 
-## Reflection
+### Reflection
 
 * 1.先看一些例子 大致了ReflectionClass , ReflectionMethod ,ReflectionParams 等等
 
@@ -326,7 +327,7 @@ object(A)#11 (0) { }
 
 * 4.[reference](http://php.net/manual/zh/class.reflectionclass.php/)
 
-## declare
+### declare
 
 有三个地方用到了declare语句:ticks, encoding, strict  
 
@@ -420,3 +421,32 @@ var_dump(sum(1.5, 2.5)); //Uncaught TypeError
 
  * 4.[reference](http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict/)
 
+### pcntl
+php进程控制扩展支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。
+ * 1.注意事项
+     * 不能被应用在web服务器环境
+     * 在Windows平台不可用
+ * 2.一些常用的函数
+    * pcntl_fork() 
+    * pcntl_wait()
+    * pcntl_signal()
+    * pcntl_exec()
+  * 3.例子
+```php
+<?php
+
+$ret  = pcntl_fork();
+
+if ($ret == -1) {
+    exit('fork error');
+}elseif ($ret == 0) {
+    echo('I am the child');
+    pcntl_exec('/bin/ls');
+}else{
+    echo $ret;
+    pcntl_wait($status);
+    echo $status;
+    sleep(60);
+}
+```
+ * 4.[reference](http://php.net/manual/zh/ref.pcntl.php/)
