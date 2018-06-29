@@ -20,13 +20,4 @@ mongodb:
 ```
 
 #### 3.常用操作
-- 连接,选择数据库,创建集合(类似于table),插入文档(类似于一条记录)
-     - mongo dbname -u username -p password 直接mongo进去操作出现unauthorized
-     - use dbname  如果不存在则创建
-     - db.dropDatabase() 删库
-     - db.createCollection("mycol", {capped : true, autoIndexId : true, size : 6142800, max : 10000 }) 
-     - db.test_collection.insertOne({"test":"test"}) 直接插入文档自动创建集合
-     - show collections
-     - db.collectionname.drop()
-     - 
-
+[文档](https://docs.mongodb.com/manual/introduction/)
