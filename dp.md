@@ -92,7 +92,7 @@ $retMatrix = getMax($array, $n, $m);
 var_dump($retMatrix[$n-1][$m]);//int(6)
 var_dump(getTrace($array, $retMatrix, $n, $m));//array(0,1,1,0)
 ```
-- 使用滚动数组, dp(n,M) = max(dp(n-1,M) , dp(n-1,M-an) + an), 只与n-1的两个数有关,可以用一个数组dp(M)来保存使用i个数的状态.即dp(M)始终保存使用i个数的最好结果.所以判断是否使用第i个数即判断第i个数的最好结果dp(M),可以表示上一个i-1的最好结果dp(M)即不使用i , 和使用i+1,dp(M-ai) + ai的较大者
+- 使用滚动数组, dp(n,M) = max(dp(n-1,M) , dp(n-1,M-an) + an), 只与n-1的两个数有关,可以用一个数组dp(M)来保存使用i个数的状态.即dp(M)始终保存使用i个数的最好结果.所以判断是否使用第i个数即判断第i个数的最好结果dp(M),可以表示上一个i-1的最好结果dp(M)即不使用i , 和使用i,dp(M-ai) + ai的较大者
 ```php
 <?php
 
