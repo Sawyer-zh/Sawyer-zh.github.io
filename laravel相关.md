@@ -99,7 +99,6 @@ public function dispatchToRoute(Request $request)
 
       $response = $this->runRouteWithinStack($route, $request);
 
-
       return $this->prepareResponse($request, $response);
 }
 ```
