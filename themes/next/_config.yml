@@ -817,7 +817,7 @@ gitalk:
   enable: true # 是否启动
   ClientID: 3b8718796c83bdd9e7b0 # 之前的Client ID
   ClientSecret: b76191d351c4c8aed30ee46f145eb651e3e18582 # 之前的Client Secret
-  repo: gitalk # 留言板内容需要存放的仓库名称
+  repo: Sawyer-zh.github.io # 留言板内容需要存放的仓库名称
   owner: Sawyer-zh # 你 github 的帐号 eg: www.github.com/zhongxia245 ,帐号就是245
   adminUser: Sawyer-zh # 管理员用户
   labels: # issue 的标签
