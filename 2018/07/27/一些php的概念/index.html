@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="php,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="php里面的一些概念,可能会忘的">
+<meta name="keywords" content="php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些php的概念">
+<meta property="og:url" content="http://Saywer-zh.github.io/2018/07/27/一些php的概念/index.html">
+<meta property="og:site_name" content="Enjoy coding">
+<meta property="og:description" content="php里面的一些概念,可能会忘的">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-01-12T15:17:36.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些php的概念">
+<meta name="twitter:description" content="php里面的一些概念,可能会忘的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Saywer-zh.github.io/2018/07/27/一些php的概念/">
+
+
+
+
+
+  <title>一些php的概念 | Enjoy coding</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-132321799-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Enjoy coding</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sawyer's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2018/07/27/一些php的概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些php的概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-27T17:33:52+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>php里面的一些概念,可能会忘的</p>
+<a id="more"></a>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><ul>
+<li><a href="./一些php的概念.md#static-后期静态绑定/">static后期静态绑定</a></li>
+<li><a href="./一些php的概念.md#callback-类型/">Callback类型介绍</a></li>
+<li><a href="./一些php的概念.md#closure-闭包/">Closure闭包</a></li>
+<li><a href="./一些php的概念.md#spl_autoload/">spl_autoload</a></li>
+<li><a href="./一些php的概念.md#reflection/">Reflection</a></li>
+<li><a href="./一些php的概念.md#declare/">declare</a></li>
+<li><a href="./一些php的概念.md#pcntl/">pcntl</a></li>
+<li><a href="./一些php的概念.md#posix/">posix</a></li>
+</ul>
+<h3 id="static-后期静态绑定"><a href="#static-后期静态绑定" class="headerlink" title="static 后期静态绑定"></a>static 后期静态绑定</h3><ul>
+<li>1.$this,self,static,parent 的一个例子 ,php手册里面例子也非常棒</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GrandPa</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">ta</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">tb</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> <span class="keyword">extends</span> <span class="title">GrandPa</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;ta();</span><br><span class="line">        <span class="keyword">static</span>::tb();</span><br><span class="line">        <span class="keyword">self</span>::tb();</span><br><span class="line">        <span class="keyword">parent</span>::tb();</span><br><span class="line">        <span class="keyword">static</span>::ta();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">ta</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">tb</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">ta</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">tb</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span> . str_repeat(<span class="string">" "</span>, <span class="number">5</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$obj = <span class="keyword">new</span> Son();</span><br><span class="line">$obj-&gt;test();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Father::ta </span><br><span class="line">Son::tb </span><br><span class="line">Father::tb </span><br><span class="line">GrandPa::tb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.结论:</p>
+<ul>
+<li>a.static 调用静态方法:调用者对应的类的静态方法, self是自己,parent是父亲</li>
+<li>b.static 调用非静态方法:相当于在father 中调用son的ta私有方法 不能访问 因此最后一行报错</li>
+<li>c.static 转发和非转发调用:利用类名不会被转发,self,parent,static均会转发直到找到一个具体的类为止</li>
+<li>d.$this-&gt;ta() 中$this是object(son),但是由于ta是private方法,在father中不可见,于是调用的是father中的ta()</li>
+</ul>
+</li>
+<li><p>3.<a href="http://php.net/manual/zh/language.oop5.late-static-bindings.php/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+<h3 id="Callback-类型"><a href="#Callback-类型" class="headerlink" title="Callback 类型"></a>Callback 类型</h3><ul>
+<li>1.栗子</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_callback_function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="keyword">__FUNCTION__</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">myCallbackMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__METHOD__</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span><span class="params">($echo )</span></span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> $echo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$fun = <span class="function"><span class="keyword">function</span><span class="params">($echo)</span></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> $echo;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">#1</span></span><br><span class="line">call_user_func(<span class="string">'my_callback_function'</span>);</span><br><span class="line"><span class="comment">#2</span></span><br><span class="line">call_user_func(<span class="keyword">array</span>(MyClass::class,<span class="string">'myCallbackMethod'</span>));</span><br><span class="line">call_user_func(<span class="keyword">array</span>(<span class="string">'MyClass'</span>,<span class="string">'myCallbackMethod'</span>));</span><br><span class="line">call_user_func(<span class="string">'MyClass::myCallbackMethod'</span>);</span><br><span class="line"><span class="comment">#3</span></span><br><span class="line">$obj = <span class="keyword">new</span> MyClass();</span><br><span class="line">call_user_func(<span class="keyword">array</span>($obj,<span class="string">'myCallbackMethod'</span>));</span><br><span class="line">call_user_func($obj,<span class="string">'__invoke'</span>);</span><br><span class="line"><span class="comment">#4</span></span><br><span class="line">call_user_func($fun,<span class="string">"hello "</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">my_callback_function</span><br><span class="line">MyClass::myCallbackMethod</span><br><span class="line">MyClass::myCallbackMethod</span><br><span class="line">MyClass::myCallbackMethod</span><br><span class="line">MyClass::myCallbackMethod</span><br><span class="line">__invoke</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.结论:</p>
+<ul>
+<li>a.传递函数:传函数的名字字符串</li>
+<li>b.静态方法的传递: 1使用字符串 2使用array 3可使用call_user_func(array(‘B’,’parent::methodname’))</li>
+<li>c.成员方法的传递: 使用array($obj,str $method)</li>
+<li>d.闭包传递:直接传闭包</li>
+</ul>
+</li>
+<li><p>3.<a href="http://php.net/manual/zh/language.types.callable.php/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+<h3 id="Closure-闭包"><a href="#Closure-闭包" class="headerlink" title="Closure 闭包"></a>Closure 闭包</h3><ul>
+<li>1.Closure::bind($closure,$newObj [, $scope = ‘static’]);        </li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>       </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $_m1 = <span class="string">'m1'</span>;</span><br><span class="line">    <span class="keyword">public</span> $m2 = <span class="string">'m2'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> $m3 = <span class="string">'m3'</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> $_m4 = <span class="string">'m4'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$f1 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    var_dump(<span class="keyword">$this</span>-&gt;_m1);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$f2 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    var_dump(<span class="keyword">$this</span>-&gt;m2);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$f3 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    var_dump(<span class="keyword">self</span>::$m3);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$f4 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    var_dump(<span class="keyword">static</span>::$_m4);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$f5 = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    var_dump(<span class="string">'hello'</span>);</span><br><span class="line">    var_dump(A::$m3);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$c1 = Closure::bind($f1,<span class="keyword">new</span> A(),A::class);</span><br><span class="line">$c2 = Closure::bind($f2,<span class="keyword">new</span> A());</span><br><span class="line">$c3 = Closure::bind($f3,<span class="keyword">new</span> A(),A::class);</span><br><span class="line">$c4 = Closure::bind($f4,<span class="keyword">null</span>,<span class="keyword">new</span> A);</span><br><span class="line">$c5 = Closure::bind($f5,<span class="keyword">null</span>);</span><br><span class="line">$c1();</span><br><span class="line">call_user_func($c2);</span><br><span class="line">$c3();</span><br><span class="line">call_user_func($c4);</span><br><span class="line">$c5();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">string(<span class="number">2</span>) <span class="string">"m1"</span> </span><br><span class="line">string(<span class="number">2</span>) <span class="string">"m2"</span> </span><br><span class="line">string(<span class="number">2</span>) <span class="string">"m3"</span> </span><br><span class="line">string(<span class="number">2</span>) <span class="string">"m4"</span> </span><br><span class="line">string(<span class="number">5</span>) <span class="string">"hello"</span></span><br><span class="line">string(<span class="number">2</span>) <span class="string">"m3"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.结论:</p>
+<ul>
+<li>a.参数意思: 1 closure 表示传入一个闭包 ,2 $newthis 这个闭包绑定在那个对象上面(可以为null) 3 $scope闭包的作用域,不传为’static’表示当前环境,new A() 和 ‘A’ 和A::class 意思一样表示在A里面</li>
+<li>b.$c1 ,$c2 : 因为$f1中使用了$_m1是私有变量,因此在第三参数需要在A里面,所以$c1,$c2的第三参数不同</li>
+<li>c.$c3,$4,$5 :由于是静态调用,因此第二个参数可以为null,而c3,c4中使用了self和static,所以需要指定$scope来指明谁是self和static,而$f5中A::$m3在外部也可以调用,因此第三个参数为’static’,如果是A::$_m4则不能调用成功</li>
+</ul>
+</li>
+<li>3.<a href="http://php.net/manual/zh/closure.bind.php/" target="_blank" rel="noopener">reference</a></li>
+</ul>
+<h3 id="spl-autoload"><a href="#spl-autoload" class="headerlink" title="spl_autoload"></a>spl_autoload</h3><ul>
+<li><p>1.例子</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">my_autoload</span><span class="params">($class)</span></span>&#123;</span><br><span class="line">    var_dump($class);</span><br><span class="line">    var_dump(<span class="string">"my_autoload"</span>);</span><br><span class="line">&#125;</span><br><span class="line">$ret = spl_autoload_register(<span class="string">'my_autoload'</span>);</span><br><span class="line">var_dump(spl_autoload_functions());</span><br><span class="line">$a = <span class="keyword">new</span> DDD();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">array</span>(<span class="number">1</span>) &#123; [<span class="number">0</span>]=&gt; string(<span class="number">11</span>) <span class="string">"my_autoload"</span> &#125; string(<span class="number">3</span>) <span class="string">"DDD"</span> string(<span class="number">11</span>) <span class="string">"my_autoload"</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.结论:</p>
+<ul>
+<li>a.new 一个对象的时候 会先调用spl_autolad_register中注册的函数,最后找不到报了个错误</li>
+</ul>
+</li>
+<li><p>3.<a href="http://php.net/manual/zh/function.spl-autoload.php/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+<h3 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h3><ul>
+<li>1.先看一些例子 大致了ReflectionClass , ReflectionMethod ,ReflectionParams 等等</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(B $b , C $c)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(D $d)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#reflectionclass </span></span><br><span class="line">$class = <span class="keyword">new</span> ReflectionClass(A::class);</span><br><span class="line">var_dump($class);</span><br><span class="line"></span><br><span class="line"><span class="comment">#reflectionmethod 不存在构造方法返回null 本身没有但是父类有也算有</span></span><br><span class="line">$constructor = $class-&gt;getConstructor();</span><br><span class="line">var_dump($constructor);</span><br><span class="line"></span><br><span class="line"><span class="comment">#reflectionparams 组成的array</span></span><br><span class="line">$params = $constructor-&gt;getParameters();</span><br><span class="line"></span><br><span class="line">var_dump($params);</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($params <span class="keyword">as</span> $param) &#123;</span><br><span class="line">    var_dump($param-&gt;getClass());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">object(ReflectionClass)<span class="comment">#1 (1) &#123; ["name"]=&gt; string(1) "A" &#125; </span></span><br><span class="line">object(ReflectionMethod)<span class="comment">#2 (2) &#123; ["name"]=&gt; string(11) "__construct" ["class"]=&gt; string(1) "A" &#125; </span></span><br><span class="line"><span class="keyword">array</span>(<span class="number">2</span>) &#123; [<span class="number">0</span>]=&gt; object(ReflectionParameter)<span class="comment">#3 (1) &#123; ["name"]=&gt; string(1) "b" &#125; [1]=&gt; object(ReflectionParameter)#4 (1) &#123; ["name"]=&gt; string(1) "c" &#125; &#125; </span></span><br><span class="line">object(ReflectionClass)<span class="comment">#5 (1) &#123; ["name"]=&gt; string(1) "B" &#125;</span></span><br><span class="line">object(ReflectionClass)<span class="comment">#5 (1) &#123; ["name"]=&gt; string(1) "C" &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.再看一个厉害一点的例子</p>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Build</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> $buildStack = [];</span><br><span class="line">    <span class="keyword">protected</span> $with = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">make</span><span class="params">($class)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">$this</span>-&gt;buildStack[] = $class;</span><br><span class="line">        </span><br><span class="line">        $reflectionCalss = <span class="keyword">new</span> ReflectionClass($class);</span><br><span class="line">        </span><br><span class="line">        $constructor = $reflectionCalss-&gt;getConstructor();</span><br><span class="line">        <span class="comment">#递归终点</span></span><br><span class="line">        <span class="keyword">if</span> (is_null($constructor)) &#123;</span><br><span class="line">           array_pop(<span class="keyword">$this</span>-&gt;buildStack);</span><br><span class="line">           <span class="keyword">return</span> $reflectionCalss-&gt;newInstance();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">#处理递归</span></span><br><span class="line">        $params = $constructor-&gt;getParameters();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">foreach</span> ($params <span class="keyword">as</span> $param) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;with[$class][] = <span class="keyword">$this</span>-&gt;make($param-&gt;getClass()-&gt;name);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        $args = array_pop(<span class="keyword">$this</span>-&gt;with);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> $reflectionCalss-&gt;newInstanceArgs($args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$build = <span class="keyword">new</span> Build;</span><br><span class="line"></span><br><span class="line">var_dump($build-&gt;make(A::class));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>输出:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">object(A)<span class="comment">#11 (0) &#123; &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3说明:</p>
+<ul>
+<li>a.正常实例化A需要实例话B,C,而实例化C之前需要实例化D… 等等! 这个只是个简单的例子,实际中的情况更复杂…一个依赖另外一个.所以我们需要简单的方式来实例化A</li>
+<li>b.有什么好的方式? 因为构造方法里面记录了它自己依赖的类,我们可以通过反射来获取这个类,并实例化,然后当作参数传给他.</li>
+<li>c.如何具体实现? 其实是一个递归! 递归的终点是没有依赖,即自己没有构造方法.直接实例化返回,递归的思路是利用实例化好的参数实例化当前对象.</li>
+<li>d.有什么值得学习的技巧? 利用buildStack成员记录当前正在实例化的对象保证实例化顺序不会错.利用with记录实例化该对象所需要的参数保证参数不会错</li>
+<li>e.代码有点眼熟? 是啊,最近看了laravel启动时候Container中的代码.然后模仿写的…哈哈哈.</li>
+</ul>
+</li>
+<li><p>4.<a href="http://php.net/manual/zh/class.reflectionclass.php/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+<h3 id="declare"><a href="#declare" class="headerlink" title="declare"></a>declare</h3><p>有三个地方用到了declare语句:ticks, encoding, strict  </p>
+<ul>
+<li><p>1.ticks(时钟周期):</p>
+<ul>
+<li><p>在declare代码段中解释器每执行N(用declare(ticks=N)指定)条可计时的低级语言就会发生的事件.事件有register_tick_function()来指定 . </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// A function called on each tick event</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick_handler</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"tick_handler() called\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">register_tick_function(<span class="string">'tick_handler'</span>);</span><br><span class="line"></span><br><span class="line">$a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($a &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    $a += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">print</span>($a);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用来检查pcntl_signal()使用ticks作为信号处理的回调机制</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//使用ticks需要PHP 4.3.0以上版本</span></span><br><span class="line"><span class="keyword">declare</span>(ticks = <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//信号处理函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sig_handler</span><span class="params">($signo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">switch</span> ($signo) &#123;</span><br><span class="line">         <span class="keyword">case</span> SIGTERM:</span><br><span class="line">             <span class="comment">// 处理SIGTERM信号</span></span><br><span class="line">             <span class="keyword">exit</span>;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> SIGHUP:</span><br><span class="line">             <span class="comment">//处理SIGHUP信号</span></span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">case</span> SIGUSR1:</span><br><span class="line">             <span class="keyword">echo</span> <span class="string">"Caught SIGUSR1...\n"</span>;</span><br><span class="line">             <span class="keyword">break</span>;</span><br><span class="line">         <span class="keyword">default</span>:</span><br><span class="line">             <span class="comment">// 处理所有其他信号</span></span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Installing signal handler...\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装信号处理器</span></span><br><span class="line">pcntl_signal(SIGTERM, <span class="string">"sig_handler"</span>);</span><br><span class="line">pcntl_signal(SIGHUP,  <span class="string">"sig_handler"</span>);</span><br><span class="line">pcntl_signal(SIGUSR1, <span class="string">"sig_handler"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者在PHP 4.3.0以上版本可以使用对象方法</span></span><br><span class="line"><span class="comment">// pcntl_signal(SIGUSR1, array($obj, "do_something");</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Generating signal SIGTERM to self...\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//向当前进程发送SIGUSR1信号</span></span><br><span class="line">posix_kill(posix_getpid(), SIGUSR1);</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Done\n"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>2.encoding: 用encoding指令来对每段脚本指定其编码方式</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">declare</span>(encoding=<span class="string">'ISO-8859-1'</span>);</span><br><span class="line"><span class="comment">// code here</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3.strict:用于strict_types</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(int $a, int $b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump(sum(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">var_dump(sum(<span class="number">1.5</span>, <span class="number">2.5</span>)); <span class="comment">//Uncaught TypeError</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>4.<a href="http://php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration.strict/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="pcntl"><a href="#pcntl" class="headerlink" title="pcntl"></a>pcntl</h3><p>php进程控制扩展支持实现了Unix方式的进程创建, 程序执行, 信号处理以及进程的中断。</p>
+<ul>
+<li>1.注意事项<ul>
+<li>不能被应用在web服务器环境</li>
+<li>在Windows平台不可用</li>
+</ul>
+</li>
+<li><p>2.一些常用的函数</p>
+<ul>
+<li>pcntl_fork() </li>
+<li>pcntl_wait()</li>
+<li>pcntl_signal()</li>
+<li>pcntl_exec()<ul>
+<li>3.例子<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$ret  = pcntl_fork();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($ret == <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="string">'fork error'</span>);</span><br><span class="line">&#125;<span class="keyword">elseif</span> ($ret == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">echo</span>(<span class="string">'I am the child'</span>);</span><br><span class="line">    pcntl_exec(<span class="string">'/bin/ls'</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> $ret;</span><br><span class="line">    pcntl_wait($status);</span><br><span class="line">    <span class="keyword">echo</span> $status;</span><br><span class="line">    sleep(<span class="number">60</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>4.<a href="http://php.net/manual/zh/ref.pcntl.php/" target="_blank" rel="noopener">reference</a></p>
+</li>
+</ul>
+<h3 id="posix"><a href="#posix" class="headerlink" title="posix"></a>posix</h3><p> This module contains an interface to those functions defined in the IEEE 1003.1 (POSIX.1) standards document which are not accessible through other means.</p>
+<ul>
+<li>1.注意事项. <ul>
+<li>windows 下不能用</li>
+</ul>
+</li>
+<li>2.常用函数<ul>
+<li>posix_getpid()</li>
+<li>posix_kill()</li>
+<li>posix_mkfifo()</li>
+</ul>
+</li>
+<li>3.<a href="http://php.net/manual/zh/book.posix.php/" target="_blank" rel="noopener">reference</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/27/一些排序算法/" rel="next" title="一些排序算法">
+                <i class="fa fa-chevron-left"></i> 一些排序算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/27/php文件操作/" rel="prev" title="php文件操作">
+                php文件操作 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sawyer</p>
+              <p class="site-description motion-element" itemprop="description">the ability to see the machine as more than when you were first led up to it, that you can make it more.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Sawyer-zh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:254091355@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-后期静态绑定"><span class="nav-number">2.</span> <span class="nav-text">static 后期静态绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback-类型"><span class="nav-number">3.</span> <span class="nav-text">Callback 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closure-闭包"><span class="nav-number">4.</span> <span class="nav-text">Closure 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spl-autoload"><span class="nav-number">5.</span> <span class="nav-text">spl_autoload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflection"><span class="nav-number">6.</span> <span class="nav-text">Reflection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#declare"><span class="nav-number">7.</span> <span class="nav-text">declare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcntl"><span class="nav-number">8.</span> <span class="nav-text">pcntl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#posix"><span class="nav-number">9.</span> <span class="nav-text">posix</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sawyer</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- gitalk.swig -->
+<link href="https://cdn.bootcss.com/gitalk/1.4.0/gitalk.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/gitalk/1.4.0/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3b8718796c83bdd9e7b0',
+    clientSecret: 'b76191d351c4c8aed30ee46f145eb651e3e18582',
+    repo: 'gitalk',
+    owner: 'Sawyer-zh',
+    admin: ['Sawyer-zh'],
+    id: md5(location.pathname),   // ISSUE：location.href 限制50个字符 (应该是Issue 内容存数据库的标识， 具体在页面上无感)
+    labels: 'gitalk'.split(',').filter(l => l),  // 需要的 labels需要一个数组，否则会报错
+    perPage: 15,
+    pagerDirection: 'last',
+    createIssueManually: false,
+    distractionFreeMode: false
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
