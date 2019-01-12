@@ -442,6 +442,7 @@
 
   
     <div id="gitalk-container"></div>
+
   
 
 
@@ -757,7 +758,7 @@
           owner: 'Sawyer-zh',
           admin: ['Sawyer-zh'],
           id: location.pathname,
-          labels: 'gitalk',
+          labels: 'gitalk'.split(',').filter(l => l),
           perPage: 15,
           pagerDirection: 'last',
           createIssueManually: false,
