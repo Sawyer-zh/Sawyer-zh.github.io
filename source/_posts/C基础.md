@@ -1,5 +1,6 @@
 ---
 title: C基础
+comments: true
 date: 2019-01-11 10:01:48
 tags:
 - C语言
