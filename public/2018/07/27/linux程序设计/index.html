@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="linux程序设计笔记">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux程序设计">
+<meta property="og:url" content="http://Saywer-zh.github.io/2018/07/27/linux程序设计/index.html">
+<meta property="og:site_name" content="Enjoy coding">
+<meta property="og:description" content="linux程序设计笔记">
+<meta property="og:locale" content="zh">
+<meta property="og:image" content="http://saywer-zh.github.io/2018/07/27/linux程序设计/img/3-2.png/">
+<meta property="og:updated_time" content="2019-01-12T15:13:40.675Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux程序设计">
+<meta name="twitter:description" content="linux程序设计笔记">
+<meta name="twitter:image" content="http://saywer-zh.github.io/2018/07/27/linux程序设计/img/3-2.png/">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Saywer-zh.github.io/2018/07/27/linux程序设计/">
+
+
+
+
+
+  <title>linux程序设计 | Enjoy coding</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-132321799-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Enjoy coding</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sawyer's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2018/07/27/linux程序设计/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux程序设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-27T17:33:52+08:00">
+                2018-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>linux程序设计笔记</p>
+<a id="more"></a>
+<h3 id="shell语法"><a href="#shell语法" class="headerlink" title="shell语法"></a>shell语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>声明:不需要声明,直接赋值;区分大小写;变量存储类型是字符串;使用read 变量名 来用这个变量名保存用户输入字符串<br>访问:变量前面加$<br>注意空格</p>
+<ul>
+<li>引号: 单引号,双引号  反斜杠</li>
+<li>环境变量 大写字母<ul>
+<li>$HOME</li>
+<li>$PATH</li>
+<li>$PS1:命令提示符如#,$</li>
+<li>$PS2:二级命令提示符如&gt;</li>
+<li>$IFS:输入域分隔符,通常是空格</li>
+<li>$0:shell脚本的名字</li>
+<li>$#:传递脚本参数个数</li>
+<li>$$:进程号</li>
+</ul>
+</li>
+<li>参数变量<ul>
+<li>$1,$2,…:脚本程序的参数</li>
+<li>$*:列出所有参数,使用环境变量中的IFS</li>
+<li>$@:$*的变体,即使IFS为空,参数也不会挤在一起</li>
+</ul>
+</li>
+</ul>
+<h4 id="条件"><a href="#条件" class="headerlink" title="条件"></a>条件</h4><p>test / [ 命令<br>如果把then 和if 放在同一行必须用;把test语句和then分隔开</p>
+<ul>
+<li>字符串比较</li>
+<li>算数比较</li>
+<li>文件条件测试</li>
+</ul>
+<h4 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h4><ul>
+<li>if … then … elif … then … else … fi</li>
+<li>for … in … do … done</li>
+<li>while … do … done</li>
+<li>case … in … … ) …;;esac</li>
+<li>命令列表<ul>
+<li>AND &amp;&amp; 前面的命令执行成功的情况下,才执行后面的命令</li>
+<li>OR || 前面一条命令执行失败才执行后面的命令</li>
+</ul>
+</li>
+</ul>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p> 声明:fun_name(){}<br> 调用:fun_name</p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ul>
+<li>break</li>
+<li>:</li>
+<li>continue</li>
+<li>.</li>
+<li>echo</li>
+<li>eval</li>
+<li>exec</li>
+<li>exit n</li>
+<li>export</li>
+<li>expr</li>
+<li>printf</li>
+<li>return</li>
+<li>set</li>
+<li>shift</li>
+<li>trap</li>
+<li>unset</li>
+<li>find</li>
+<li>grep</li>
+</ul>
+<h4 id="命令的执行"><a href="#命令的执行" class="headerlink" title="命令的执行"></a>命令的执行</h4><ul>
+<li>算数扩展 : $(())</li>
+<li>参数扩展 : ${param:-default} …</li>
+</ul>
+<h4 id="here-文档"><a href="#here-文档" class="headerlink" title="here 文档"></a>here 文档</h4><ul>
+<li>&lt;&lt; !xxx!</li>
+</ul>
+<h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><ul>
+<li>sh -n/v/x/u</li>
+</ul>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="文件和设备"><a href="#文件和设备" class="headerlink" title="文件和设备"></a>文件和设备</h4><ul>
+<li>/dev/console</li>
+<li>/dev/tty</li>
+<li>/dev/null</li>
+</ul>
+<h4 id="系统调用和库函数"><a href="#系统调用和库函数" class="headerlink" title="系统调用和库函数"></a>系统调用和库函数</h4><ul>
+<li>系统调用:由系统直接提供直接对文件和设备的访问和控制的底层函数</li>
+<li>库函数:对设备和磁盘文件提供更高层的接口</li>
+</ul>
+<p><img src="img/3-2.png/" alt="各种文件函数与用户,设备驱动程序,内核和硬件的关系"></p>
+<h4 id="底层文件访问"><a href="#底层文件访问" class="headerlink" title="底层文件访问"></a>底层文件访问</h4><p>一些系统调用</p>
+<ul>
+<li>write</li>
+<li>read</li>
+<li>open </li>
+<li>close </li>
+<li>ioctl</li>
+<li>lseek</li>
+<li>fstat, stat, lstst</li>
+<li>dup, dup2</li>
+</ul>
+<h4 id="标准IO库"><a href="#标准IO库" class="headerlink" title="标准IO库"></a>标准IO库</h4><ul>
+<li>fopen,fclose</li>
+<li>fread,fwrite</li>
+<li>fflush</li>
+<li>fseek</li>
+<li>fgetc, getc, getchar</li>
+<li>fputc, putc, putchar</li>
+<li>fgets, gets</li>
+<li>printf, fprintf, sprintf</li>
+<li>scanf, fscanf, sscanf</li>
+</ul>
+<h4 id="文件和目录维护"><a href="#文件和目录维护" class="headerlink" title="文件和目录维护"></a>文件和目录维护</h4><ul>
+<li>chmod</li>
+<li>chown</li>
+<li>unlink, link, symlink</li>
+<li>mkdir, rmdir</li>
+<li>chdir</li>
+</ul>
+<h4 id="扫描目录"><a href="#扫描目录" class="headerlink" title="扫描目录"></a>扫描目录</h4><ul>
+<li>opendir</li>
+<li>readdir</li>
+<li>telldir</li>
+<li>seekdir</li>
+<li>closedir</li>
+</ul>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><ul>
+<li>strerror</li>
+<li>perror</li>
+</ul>
+<h4 id="proc-文件系统"><a href="#proc-文件系统" class="headerlink" title="/proc 文件系统"></a>/proc 文件系统</h4><p>包含了许多特殊文件用来对驱动程序和内核信息进行更高层的访问</p>
+<h3 id="Linux-环境"><a href="#Linux-环境" class="headerlink" title="Linux 环境"></a>Linux 环境</h3><h4 id="向程序传递参数"><a href="#向程序传递参数" class="headerlink" title="向程序传递参数"></a>向程序传递参数</h4><ul>
+<li>getopt</li>
+<li>getopt_long</li>
+</ul>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><ul>
+<li>用途: 采用环境变量改变程序运行方式,类似全局变量</li>
+<li>environ变量: 通过这个变量访问字符串数组</li>
+</ul>
+<h4 id="时间和日期"><a href="#时间和日期" class="headerlink" title="时间和日期"></a>时间和日期</h4><ul>
+<li>time, difftime, gmttime, localtime, mktime, asctime, ctime, strftime, strptime</li>
+</ul>
+<h4 id="临时文件"><a href="#临时文件" class="headerlink" title="临时文件"></a>临时文件</h4><ul>
+<li>tmpnam, tmpfile</li>
+</ul>
+<h3 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h3><h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><ul>
+<li>简单的内存分配:malloc</li>
+<li>分配大量内存: 交换空间</li>
+<li>滥用内存: segmentation error</li>
+<li>空指针: segmentation error</li>
+<li>释放内存: free</li>
+</ul>
+<h4 id="文件锁定"><a href="#文件锁定" class="headerlink" title="文件锁定"></a>文件锁定</h4><ul>
+<li>创建锁文件</li>
+<li>区域锁定<ul>
+<li>共享(读)锁:有共享锁时,不能获得独占锁</li>
+<li>解锁:</li>
+<li>独占(写)锁:有独占锁时,不能有其他锁</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程和信号"><a href="#进程和信号" class="headerlink" title="进程和信号"></a>进程和信号</h3><h4 id="进程的结构-类型和调度"><a href="#进程的结构-类型和调度" class="headerlink" title="进程的结构,类型和调度"></a>进程的结构,类型和调度</h4><ul>
+<li>进程的结构:有自己的栈空间,保存局部变量和函数的调用和返回,有自己的环境空间,包含为这个进程建立的环境变量.<ul>
+<li>进程表</li>
+<li>查看进程 ps a/f/x/e/u    PID/PPID/TTY/CMD/STAT/</li>
+<li>系统进程 </li>
+<li>进程调度 nice</li>
+</ul>
+</li>
+<li>启动新进程:<ul>
+<li>system : 程序必须等待由system函数启动的进程结束之后才能继续</li>
+<li>替换进程映像 exec: 把当前进程替换为一个新的进程,原来的进程不再执行</li>
+<li>复制进程映像 fork:父进程返回子进程pid,子进程返回0 这样可以区分两个进程</li>
+</ul>
+</li>
+<li>等待一个进程 wait: 父进程中调用wait</li>
+<li>僵尸进程: 子进程运行结束 ,由于需要保存返回给父进程的信息所以依然存在系统中.这个时候就是僵尸进程,知道父进程调用wati 或者正常结束</li>
+<li>线程: 进程可以相互协作,互相发送消息,互相中断,甚至可以共享内存段.但是想要共享变量不太可能.于是有了线程</li>
+</ul>
+<h4 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h4><p>信号是UNIX/LINUX 系统响应某些条件而产生的一个事件.用raise/生成表示一个信号的产生,用catch/捕获表示接收一个信号</p>
+<ul>
+<li>SIG… </li>
+<li>发送信号: kill</li>
+</ul>
+<h3 id="POSIX线程"><a href="#POSIX线程" class="headerlink" title="POSIX线程"></a>POSIX线程</h3><h4 id="在进程中创建新线程"><a href="#在进程中创建新线程" class="headerlink" title="在进程中创建新线程"></a>在进程中创建新线程</h4><ul>
+<li>pthread_create : 类似于进程中的fork</li>
+<li>pthread_exit: 类似于exit</li>
+<li>pthread_join: 类似于pthread_wait</li>
+</ul>
+<h4 id="在一个进程中同步线程之间的数据访问"><a href="#在一个进程中同步线程之间的数据访问" class="headerlink" title="在一个进程中同步线程之间的数据访问"></a>在一个进程中同步线程之间的数据访问</h4><ul>
+<li>信号量:他的作用如同看守一段代码的看门人<ul>
+<li>sem_init</li>
+<li>sem_wait</li>
+<li>sem_post</li>
+<li>sem_destroy</li>
+</ul>
+</li>
+<li>互斥量: 他的作用如同保护代码的一个互斥设备<ul>
+<li>pthread_mutex_init</li>
+<li>pthread_mutex_lock</li>
+<li>pthread_mutex_unlock</li>
+<li>pthread_mutex_destroy</li>
+</ul>
+</li>
+</ul>
+<h4 id="线程的属性"><a href="#线程的属性" class="headerlink" title="线程的属性"></a>线程的属性</h4><h4 id="取消一个线程"><a href="#取消一个线程" class="headerlink" title="取消一个线程"></a>取消一个线程</h4><ul>
+<li>pthread_cancel</li>
+</ul>
+<h3 id="进程间通信-管道"><a href="#进程间通信-管道" class="headerlink" title="进程间通信:管道"></a>进程间通信:管道</h3><h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>从一个进程连接数据流到另外一个进程时</p>
+<h4 id="进程管道"><a href="#进程管道" class="headerlink" title="进程管道"></a>进程管道</h4><ul>
+<li>popen</li>
+<li>pclose</li>
+</ul>
+<h4 id="pipe调用"><a href="#pipe调用" class="headerlink" title="pipe调用"></a>pipe调用</h4><ul>
+<li>pipe(int file_descriptor[2])   向file_descriptor[1]中写数据 从file_descriptor[0]中读数据 先进先出</li>
+<li>调用pipe(..) 成功后 fork , 然后在子进程读,父进程写,就可以实现进程间的通信</li>
+</ul>
+<h4 id="子进程和父进程"><a href="#子进程和父进程" class="headerlink" title="子进程和父进程"></a>子进程和父进程</h4><ul>
+<li>上个例子中由于fork之后文件描述符变量也会在两个进程中存在,因此在同一个程序中可以很方便的通信.如果其中一个进程需要执行别的程序呢? 这时候需要用exec来启动一个新的程序,然后把文件描述符传给这个程序就可以实现两个不同程序之间的进程的通信</li>
+<li>管道关闭后的读操作:对已关闭写数据的管道进行读操作将返回0.fork之后只有当父子进程中的写数据的管道都关闭时,对管道的读操作才会失败</li>
+<li>把管道用作标准输入和标准输出:dup() 复制文件描述符,返回最小的文件描述符.fork之后子进程把0(标准输入)关了,然后dup管道读文件的描述符[0],返回标准输入0.然后关掉原来管道读描述符,管道写描述符.父进程同理</li>
+</ul>
+<h4 id="FIFO-命名管道"><a href="#FIFO-命名管道" class="headerlink" title="FIFO 命名管道"></a>FIFO 命名管道</h4><ul>
+<li>以上还是只能再相关程序之间传递数据,即由共同祖先进程启动的</li>
+<li>mknod / mkfifo(优先使用)</li>
+<li>cat &lt; fifofile &amp; , echo helloworld &gt; fifofile </li>
+<li>访问fifo文件: open 但是不能以读写的方式打开 </li>
+</ul>
+<h3 id="信号量-共享内存-消息队列"><a href="#信号量-共享内存-消息队列" class="headerlink" title="信号量,共享内存,消息队列"></a>信号量,共享内存,消息队列</h3><h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4><h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><h3 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h3><h4 id="套接字连接的工作原理"><a href="#套接字连接的工作原理" class="headerlink" title="套接字连接的工作原理"></a>套接字连接的工作原理</h4><ul>
+<li>套接字是一种通信机制,凭借这种机制,客户端/服务端系统的开发工作既可以在本地进行,也可以跨网络进行.</li>
+<li>套接字如何连接?<ul>
+<li>服务端<ul>
+<li>socket 调用创建一个套接字</li>
+<li>bind调用 命名 本地 系统文件名(/tmp 或者/usr/tmp), 网络 服务标识符(端口或者访问点)</li>
+<li>listen调用 创建一个队列并将其用于存放来自客户端的连接</li>
+<li>accept调用 接收客户端的连接</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>socket 调用创建一个套接字</li>
+<li>connect 以服务端的命名套接字作为一个地址来调用connect与服务器建立连接</li>
+</ul>
+</li>
+<li>套接字属性<ul>
+<li>域domain  最常见的是AF_INET 指的是internet 底层协议为IP协议</li>
+<li>类型<ul>
+<li>流套接字SOCK_STREAM 底层由TCP/IP实现</li>
+<li>数据报套接字 SOCK_DGRAM UDP/IP实现</li>
+<li>套接字协议</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/27/mongo/" rel="next" title="mongo">
+                <i class="fa fa-chevron-left"></i> mongo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/29/dp/" rel="prev" title="dp">
+                dp <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Sawyer</p>
+              <p class="site-description motion-element" itemprop="description">the ability to see the machine as more than when you were first led up to it, that you can make it more.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Sawyer-zh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:254091355@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#shell语法"><span class="nav-number">1.</span> <span class="nav-text">shell语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">1.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件"><span class="nav-number">1.2.</span> <span class="nav-text">条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制结构"><span class="nav-number">1.3.</span> <span class="nav-text">控制结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">1.4.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令"><span class="nav-number">1.5.</span> <span class="nav-text">命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#命令的执行"><span class="nav-number">1.6.</span> <span class="nav-text">命令的执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#here-文档"><span class="nav-number">1.7.</span> <span class="nav-text">here 文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试"><span class="nav-number">1.8.</span> <span class="nav-text">调试</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">2.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件和设备"><span class="nav-number">2.1.</span> <span class="nav-text">文件和设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用和库函数"><span class="nav-number">2.2.</span> <span class="nav-text">系统调用和库函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#底层文件访问"><span class="nav-number">2.3.</span> <span class="nav-text">底层文件访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标准IO库"><span class="nav-number">2.4.</span> <span class="nav-text">标准IO库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件和目录维护"><span class="nav-number">2.5.</span> <span class="nav-text">文件和目录维护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扫描目录"><span class="nav-number">2.6.</span> <span class="nav-text">扫描目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误处理"><span class="nav-number">2.7.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#proc-文件系统"><span class="nav-number">2.8.</span> <span class="nav-text">/proc 文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-环境"><span class="nav-number">3.</span> <span class="nav-text">Linux 环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#向程序传递参数"><span class="nav-number">3.1.</span> <span class="nav-text">向程序传递参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#环境变量"><span class="nav-number">3.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间和日期"><span class="nav-number">3.3.</span> <span class="nav-text">时间和日期</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#临时文件"><span class="nav-number">3.4.</span> <span class="nav-text">临时文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据管理"><span class="nav-number">4.</span> <span class="nav-text">数据管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存管理"><span class="nav-number">4.1.</span> <span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件锁定"><span class="nav-number">4.2.</span> <span class="nav-text">文件锁定</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程和信号"><span class="nav-number">5.</span> <span class="nav-text">进程和信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的结构-类型和调度"><span class="nav-number">5.1.</span> <span class="nav-text">进程的结构,类型和调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#信号"><span class="nav-number">5.2.</span> <span class="nav-text">信号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#POSIX线程"><span class="nav-number">6.</span> <span class="nav-text">POSIX线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在进程中创建新线程"><span class="nav-number">6.1.</span> <span class="nav-text">在进程中创建新线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在一个进程中同步线程之间的数据访问"><span class="nav-number">6.2.</span> <span class="nav-text">在一个进程中同步线程之间的数据访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程的属性"><span class="nav-number">6.3.</span> <span class="nav-text">线程的属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#取消一个线程"><span class="nav-number">6.4.</span> <span class="nav-text">取消一个线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进程间通信-管道"><span class="nav-number">7.</span> <span class="nav-text">进程间通信:管道</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管道"><span class="nav-number">7.1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程管道"><span class="nav-number">7.2.</span> <span class="nav-text">进程管道</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pipe调用"><span class="nav-number">7.3.</span> <span class="nav-text">pipe调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子进程和父进程"><span class="nav-number">7.4.</span> <span class="nav-text">子进程和父进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FIFO-命名管道"><span class="nav-number">7.5.</span> <span class="nav-text">FIFO 命名管道</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量-共享内存-消息队列"><span class="nav-number">8.</span> <span class="nav-text">信号量,共享内存,消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信号量"><span class="nav-number">8.1.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享内存"><span class="nav-number">8.2.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息队列"><span class="nav-number">8.3.</span> <span class="nav-text">消息队列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#套接字"><span class="nav-number">9.</span> <span class="nav-text">套接字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#套接字连接的工作原理"><span class="nav-number">9.1.</span> <span class="nav-text">套接字连接的工作原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sawyer</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- gitalk.swig -->
+<link href="https://cdn.bootcss.com/gitalk/1.4.0/gitalk.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/gitalk/1.4.0/gitalk.min.js"></script>
+<script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '3b8718796c83bdd9e7b0',
+    clientSecret: 'b76191d351c4c8aed30ee46f145eb651e3e18582',
+    repo: 'gitalk',
+    owner: 'Sawyer-zh',
+    admin: ['Sawyer-zh'],
+    id: md5(location.pathname),   // ISSUE：location.href 限制50个字符 (应该是Issue 内容存数据库的标识， 具体在页面上无感)
+    labels: 'gitalk'.split(',').filter(l => l),  // 需要的 labels需要一个数组，否则会报错
+    perPage: 15,
+    pagerDirection: 'last',
+    createIssueManually: false,
+    distractionFreeMode: false
+  })
+  gitalk.render('gitalk-container')
+</script>
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
