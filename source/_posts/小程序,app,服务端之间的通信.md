@@ -26,7 +26,7 @@ categories:
 ### 具体流程
 如图:
 
-![小程序,服务器,Android设备支付生命周期](img/pay_life_circle.png/)
+![小程序,服务器,Android设备支付生命周期](/images/img/pay_life_circle.png)
 
 ### 具体实现
 
