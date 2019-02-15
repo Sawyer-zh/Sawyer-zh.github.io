@@ -60,7 +60,7 @@ typedef struct tagPoint{
 #endif
 ```
 
-### ___`___attribute__ ((visibility("default")))_`
+### ______attribute___ ((visibility("default")))_
 
 来源于`php-src`,如下.意思就是如果设置成`hidden`就不能被`shared objects`调用
 ```c
@@ -85,6 +85,7 @@ SAPI_API void sapi_startup(sapi_module_struct *sf){
 > In the GNU compiler collection (GCC) environment, the term that is used for exporting is visibility. As it applies to functions and variables in a shared object, visibility refers to the ability of other shared objects to call a C/C++ function. Functions with default visibility have a global scope and can be called from other shared objects. Functions with hidden visibility have a local scope and cannot be called from other shared objects.
 
 ### `__declspec()`
+
 ```c
 #ifdef LIBZEND_EXPORTS
 #	define ZEND_API __declspec(dllexport)
@@ -92,6 +93,7 @@ SAPI_API void sapi_startup(sapi_module_struct *sf){
 #	define ZEND_API __declspec(dllimport)
 #endif
 ```
+
 ### extern "C"
 
 作用是编译的时候使C和C++产生相同的符号.因为C++支持重载,编译时会在符号后面添上参数类型.[参见](https://blog.csdn.net/MonroeD/article/details/54880944)

@@ -20,6 +20,7 @@ php里面的一些概念,可能会忘的
 * [declare](./一些php的概念.md#declare/)
 * [pcntl](./一些php的概念.md#pcntl/)
 * [posix](./一些php的概念.md#posix/)
+* [class_alias](./一些php的概念.md#class_alias/)
 
 
 ### static 后期静态绑定
@@ -465,7 +466,7 @@ if ($ret == -1) {
  * 4.[reference](http://php.net/manual/zh/ref.pcntl.php/)
 
 
- ### posix
+### posix
  This module contains an interface to those functions defined in the IEEE 1003.1 (POSIX.1) standards document which are not accessible through other means.
   * 1.注意事项. 
     * windows 下不能用
@@ -474,3 +475,37 @@ if ($ret == -1) {
     * posix_kill()
     * posix_mkfifo()
   * 3.[reference](http://php.net/manual/zh/book.posix.php/)
+
+### clase_alias
+
+lumen有一个开启Facades的方法,通过class_alias把$original,和$alias指向同一个类达到简化的效果
+
+
+```php
+public function withAliases($userAliases = [])
+{
+    $defaults = [
+        'Illuminate\Support\Facades\Auth' => 'Auth',
+        'Illuminate\Support\Facades\Cache' => 'Cache',
+        'Illuminate\Support\Facades\DB' => 'DB',
+        'Illuminate\Support\Facades\Event' => 'Event',
+        'Illuminate\Support\Facades\Gate' => 'Gate',
+        'Illuminate\Support\Facades\Log' => 'Log',
+        'Illuminate\Support\Facades\Queue' => 'Queue',
+        'Illuminate\Support\Facades\Route' => 'Route',
+        'Illuminate\Support\Facades\Schema' => 'Schema',
+        'Illuminate\Support\Facades\URL' => 'URL',
+        'Illuminate\Support\Facades\Validator' => 'Validator',
+    ];
+
+    if (! static::$aliasesRegistered) {
+        static::$aliasesRegistered = true;
+
+        $merged = array_merge($defaults, $userAliases);
+
+        foreach ($merged as $original => $alias) {
+            class_alias($original, $alias);
+        }
+    }
+}
+``` 
