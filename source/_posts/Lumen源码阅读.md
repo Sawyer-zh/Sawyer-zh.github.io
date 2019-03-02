@@ -6,6 +6,8 @@ tags:
 
 最近用Lumen写Api,时不时会去看看源码.整理一下.
 
+<!-- more -->
+
 # 自动加载
 
 自动加载是通过利用`composer`完成的.主要利用`spl_autoload_register`这个函数注册`composer`里面的自动加载方法`loadClass`
