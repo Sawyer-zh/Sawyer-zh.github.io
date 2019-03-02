@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="最近用Lumen写Api,时不时会去看看源码.整理一下. 自动加载自动加载是通过利用composer完成的.主要利用spl_autoload_register这个函数注册composer里面的自动加载方法loadClass .env 文件加载实际上使用putenv和apache_getenv以及$_EVN,$_SERVER等等设置环境变量 实例化IoC容器123456789101112public">
+<meta name="description" content="最近用Lumen写Api,时不时会去看看源码.整理一下.">
 <meta name="keywords" content="IT,互联网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lumen源码阅读">
 <meta property="og:url" content="http://Saywer-zh.github.io/2019/02/23/Lumen源码阅读/index.html">
 <meta property="og:site_name" content="Enjoy coding">
-<meta property="og:description" content="最近用Lumen写Api,时不时会去看看源码.整理一下. 自动加载自动加载是通过利用composer完成的.主要利用spl_autoload_register这个函数注册composer里面的自动加载方法loadClass .env 文件加载实际上使用putenv和apache_getenv以及$_EVN,$_SERVER等等设置环境变量 实例化IoC容器123456789101112public">
+<meta property="og:description" content="最近用Lumen写Api,时不时会去看看源码.整理一下.">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-24T10:34:25.340Z">
+<meta property="og:updated_time" content="2019-03-02T18:19:02.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lumen源码阅读">
-<meta name="twitter:description" content="最近用Lumen写Api,时不时会去看看源码.整理一下. 自动加载自动加载是通过利用composer完成的.主要利用spl_autoload_register这个函数注册composer里面的自动加载方法loadClass .env 文件加载实际上使用putenv和apache_getenv以及$_EVN,$_SERVER等等设置环境变量 实例化IoC容器123456789101112public">
+<meta name="twitter:description" content="最近用Lumen写Api,时不时会去看看源码.整理一下.">
 
 
 
@@ -372,6 +372,7 @@
 
       
         <p>最近用Lumen写Api,时不时会去看看源码.整理一下.</p>
+<a id="more"></a>
 <h1 id="自动加载"><a href="#自动加载" class="headerlink" title="自动加载"></a>自动加载</h1><p>自动加载是通过利用<code>composer</code>完成的.主要利用<code>spl_autoload_register</code>这个函数注册<code>composer</code>里面的自动加载方法<code>loadClass</code></p>
 <h1 id="env-文件加载"><a href="#env-文件加载" class="headerlink" title=".env 文件加载"></a>.env 文件加载</h1><p>实际上使用<code>putenv</code>和<code>apache_getenv</code>以及<code>$_EVN</code>,<code>$_SERVER</code>等等设置环境变量</p>
 <h1 id="实例化IoC容器"><a href="#实例化IoC容器" class="headerlink" title="实例化IoC容器"></a>实例化IoC容器</h1><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($basePath = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">empty</span>(env(<span class="string">'APP_TIMEZONE'</span>))) &#123;</span><br><span class="line">        date_default_timezone_set(env(<span class="string">'APP_TIMEZONE'</span>, <span class="string">'UTC'</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;basePath = $basePath;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;bootstrapContainer();</span><br><span class="line">    <span class="keyword">$this</span>-&gt;registerErrorHandling();</span><br><span class="line">    <span class="keyword">$this</span>-&gt;bootstrapRouter();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>

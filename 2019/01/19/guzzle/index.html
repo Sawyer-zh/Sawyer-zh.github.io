@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的. 一个简单的例子首先发送一个简">
+<meta name="description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的.">
 <meta name="keywords" content="php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="guzzle">
 <meta property="og:url" content="http://Saywer-zh.github.io/2019/01/19/guzzle/index.html">
 <meta property="og:site_name" content="Enjoy coding">
-<meta property="og:description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的. 一个简单的例子首先发送一个简">
+<meta property="og:description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的.">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-15T11:43:51.859Z">
+<meta property="og:updated_time" content="2019-03-02T18:18:50.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="guzzle">
-<meta name="twitter:description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的. 一个简单的例子首先发送一个简">
+<meta name="twitter:description" content="之前使用php发网络请求主要用的是file_get_contents() 和curl扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有psr7标准,有了标准,大家的代码就可以复用了.所以尝试看一下guzzlehttp的源码,看看他是如何实现网络请求的.">
 
 
 
@@ -394,6 +394,7 @@
 
       
         <p>之前使用php发网络请求主要用的是<code>file_get_contents()</code> 和<code>curl</code>扩展.每次来新需求的时候自己就会封装一个网络请求库.无论是自己使用还是团队合作,都不利于积累,每次都需要重新封装,太复杂了.我想其他人肯定也考虑到了这个问题,因此才会有<a href="https://www.php-fig.org/psr/psr-7" target="_blank" rel="noopener">psr7标准</a>,有了标准,大家的代码就可以复用了.所以尝试看一下<code>guzzlehttp</code>的源码,看看他是如何实现网络请求的.</p>
+<a id="more"></a>
 <h3 id="一个简单的例子"><a href="#一个简单的例子" class="headerlink" title="一个简单的例子"></a>一个简单的例子</h3><p>首先发送一个简单的请求,然后追踪代码看看是如何执行的.</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 同步</span></span><br><span class="line">$client = <span class="keyword">new</span> GuzzleHttp\Client;</span><br><span class="line"></span><br><span class="line">$resp = $client -&gt;get(<span class="string">'http://www.baidu.com'</span>);</span><br><span class="line"></span><br><span class="line">var_dump($resp-&gt;getBody()-&gt;getContents());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步</span></span><br><span class="line">$promise1 = $client -&gt;getAsync(<span class="string">'http://www.baidu.com'</span>);</span><br><span class="line"></span><br><span class="line">$p = $promise1-&gt;then(<span class="function"><span class="keyword">function</span><span class="params">($res)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    var_dump($res);</span><br><span class="line"></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span><span class="params">($res)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    var_dump($res);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$p-&gt;wait();</span><br></pre></td></tr></table></figure>
 <h3 id="实例化Client"><a href="#实例化Client" class="headerlink" title="实例化Client"></a>实例化Client</h3><p>首先实例化client的时候会检查一下$config[‘handler’],如果没有则使用默认的.</p>
