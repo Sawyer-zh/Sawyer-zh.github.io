@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="Enjoy coding">
 <meta property="og:description" content="平时用到的,感觉会忘记的">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-12T16:26:25.286Z">
+<meta property="og:updated_time" content="2019-02-23T05:16:21.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux一些命令">
 <meta name="twitter:description" content="平时用到的,感觉会忘记的">
@@ -395,7 +395,7 @@
       
         <p>平时用到的,感觉会忘记的</p>
 <a id="more"></a>
-<h3 id="man"><a href="#man" class="headerlink" title="man"></a>man</h3><p>这个命令千万不能忘记!!!<br><code>man man</code>: 查看<code>man</code>的用法,很多命令后面有个括号括着一个数字,表示这个命令是属于哪个部分的.</p>
+<h1 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h1><h2 id="帮助相关"><a href="#帮助相关" class="headerlink" title="帮助相关"></a>帮助相关</h2><h3 id="man-whatis-info-which"><a href="#man-whatis-info-which" class="headerlink" title="man , whatis , info , which"></a>man , whatis , info , which</h3><p>这个命令千万不能忘记!!!<br><code>man man</code>: 查看<code>man</code>的用法,很多命令后面有个括号括着一个数字,表示这个命令是属于哪个部分的.</p>
 <ul>
 <li>1   Executable programs or shell commands</li>
 <li>2   System calls (functions provided by the kernel)</li>
@@ -407,8 +407,72 @@
 <li>8   System administration commands (usually only for root)</li>
 <li>9   Kernel routines [Non standard]</li>
 </ul>
-<p>如果有多个如<code>kill</code>, 可以使用<code>man kill.2</code>查看系统调用的用法</p>
-<h3 id="ipcs-ipcrm"><a href="#ipcs-ipcrm" class="headerlink" title="ipcs , ipcrm"></a>ipcs , ipcrm</h3>
+<p>如果有多个如<code>kill</code>, 可以使用<code>man kill.2</code>查看系统调用的用法 , 或者<code>man 2 kill</code></p>
+<p><code>man -k keyword</code>:要是部分命令记不全了可以使用这个.如<code>man -k ipc</code></p>
+<p><code>whatis</code>:一行简介</p>
+<p><code>info</code>:详细文档</p>
+<h2 id="文件操作相关"><a href="#文件操作相关" class="headerlink" title="文件操作相关"></a>文件操作相关</h2><h3 id="mkdir-rm-mv-cp"><a href="#mkdir-rm-mv-cp" class="headerlink" title="mkdir , rm  , mv , cp"></a>mkdir , rm  , mv , cp</h3><h3 id="cd-pwd"><a href="#cd-pwd" class="headerlink" title="cd , pwd"></a>cd , pwd</h3><h3 id="ls-ls-lrt"><a href="#ls-ls-lrt" class="headerlink" title="ls ,ls -lrt"></a>ls ,ls -lrt</h3><h3 id="find-locate"><a href="#find-locate" class="headerlink" title="find , locate"></a>find , locate</h3><p><code>find ./ -name &quot;*.c&quot; -exec rm {}</code>:递归当前目录及子目录删除<code>.c</code>文件</p>
+<p><code>locate string</code>: find 是实时查找,locate是根据文件索引信息</p>
+<p><code>updatedb</code></p>
+<h3 id="cat-vi-head-tail-more-diff"><a href="#cat-vi-head-tail-more-diff" class="headerlink" title="cat, vi, head, tail, more, diff"></a>cat, vi, head, tail, more, diff</h3><p><code>tail -f</code></p>
+<h3 id="egrep-grep"><a href="#egrep-grep" class="headerlink" title="egrep, grep"></a>egrep, grep</h3><h3 id="chown-chmod"><a href="#chown-chmod" class="headerlink" title="chown, chmod"></a>chown, chmod</h3><h3 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h3><h3 id="amp-amp-gt-gt-gt-lt-amp"><a href="#amp-amp-gt-gt-gt-lt-amp" class="headerlink" title="| , ; , || , &amp;&amp; , &gt; , &gt;&gt; , &lt; , &amp;"></a>| , ; , || , &amp;&amp; , &gt; , &gt;&gt; , &lt; , &amp;</h3><h3 id="profile-bashrc"><a href="#profile-bashrc" class="headerlink" title=".profile , .bashrc"></a>.profile , .bashrc</h3><p><code>export PATH</code></p>
+<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><h3 id="find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件"><a href="#find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件" class="headerlink" title="find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print:查找pdf和txt文件"></a><code>find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print</code>:查找pdf和txt文件</h3><ul>
+<li><p>定制:</p>
+<ul>
+<li><code>-maxdepth 1</code>:</li>
+<li><code>-type f</code>: f / l / d</li>
+<li><code>-regex &quot;.\(\.txt|\.pdf)$&quot;</code>:</li>
+<li><code>-atime 7</code>: mtime ctime (访问,修改,元素或者权限变化 单位:天) ,分钟是-amin</li>
+<li><code>-size +2k</code>: +大于,-小于</li>
+<li><code>-perm 644</code>:权限</li>
+<li><code>-user sawyer</code>:用户名</li>
+</ul>
+</li>
+<li><p>后续执行动作</p>
+<ul>
+<li><code>-delete</code></li>
+<li><code>| xargs rm</code></li>
+<li><code>-exec rm {} \</code> : {}是一个特殊的字符串,对于每一个匹配的文件,他会替换成相应的文件名</li>
+<li><code>-exec ./commands.sh {} \</code> </li>
+<li><code>-printO</code>:使用\O作为文件的定界符,这样就可以搜索包含空格的文件</li>
+</ul>
+</li>
+</ul>
+<h3 id="grep-pattern-file"><a href="#grep-pattern-file" class="headerlink" title="grep pattern file"></a><code>grep pattern file</code></h3><ul>
+<li><code>-o</code>:只输出匹配的文本行</li>
+<li><code>-v</code>:只输出没有匹配的文本行</li>
+</ul>
+<h3 id="xargs"><a href="#xargs" class="headerlink" title="xargs"></a><code>xargs</code></h3><p><code>ps -ef | grep php | grep  master | awk &#39;{print $2}&#39; | xargs sudo kill -USR2</code>:重启php-fpm</p>
+<ul>
+<li><code>-d</code>:定义界定符</li>
+<li><code>-n</code>:指定输出为多行</li>
+<li><code>-I {}</code>:指定替换字符串</li>
+<li><code>-0</code>:指定0为输入界定符</li>
+</ul>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort"></a><code>sort</code></h3><ul>
+<li><code>-n</code>:按字数进行排序</li>
+<li><code>-d</code>:按字典序进行排序</li>
+<li><code>-r</code></li>
+<li><code>-k N</code></li>
+</ul>
+<h3 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a><code>uniq</code></h3><h3 id="tr"><a href="#tr" class="headerlink" title="tr"></a><code>tr</code></h3><h2 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h2><h3 id="df-du"><a href="#df-du" class="headerlink" title="df , du"></a><code>df</code> , <code>du</code></h3><p><code>du -sh</code>ls<code>| sort</code>: <code>for i in</code>ls<code>; do du -sh $i;done | sort</code></p>
+<ul>
+<li><code>-s</code></li>
+<li><code>-h</code></li>
+</ul>
+<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a><code>tar</code></h3><p><code>tar -xvf demo.tar</code></p>
+<ul>
+<li><code>-x</code>:z,j,J(gz,bz2,xz)</li>
+<li><code>-c</code></li>
+<li><code>-v</code></li>
+<li><code>-f</code></li>
+</ul>
+<h2 id="查询进程"><a href="#查询进程" class="headerlink" title="查询进程"></a>查询进程</h2><h3 id="ps-top-lsof-kill"><a href="#ps-top-lsof-kill" class="headerlink" title="ps, top, lsof,kill"></a><code>ps</code>, <code>top</code>, <code>lsof</code>,<code>kill</code></h3><h2 id="性能监控"><a href="#性能监控" class="headerlink" title="性能监控"></a>性能监控</h2><h3 id="sar-free-df-du"><a href="#sar-free-df-du" class="headerlink" title="sar , free , df ,du"></a><code>sar</code> , <code>free</code> , <code>df</code> ,<code>du</code></h3><h2 id="网络工具"><a href="#网络工具" class="headerlink" title="网络工具"></a>网络工具</h2><h3 id="netstat-lsof"><a href="#netstat-lsof" class="headerlink" title="netstat , lsof"></a><code>netstat</code> , <code>lsof</code></h3><p><code>netstat -tnlp</code></p>
+<h3 id="route-ping-ifconfig-traceroute-host"><a href="#route-ping-ifconfig-traceroute-host" class="headerlink" title="route ,ping ,ifconfig , traceroute ,host"></a><code>route</code> ,<code>ping</code> ,<code>ifconfig</code> , <code>traceroute</code> ,<code>host</code></h3><h3 id="wget-ssh-scp"><a href="#wget-ssh-scp" class="headerlink" title="wget , ssh, scp"></a><code>wget</code> , <code>ssh</code>, <code>scp</code></h3><h2 id="用户管理工具"><a href="#用户管理工具" class="headerlink" title="用户管理工具"></a>用户管理工具</h2><h3 id="useradd-passwd-userdel"><a href="#useradd-passwd-userdel" class="headerlink" title="useradd,passwd,userdel"></a><code>useradd</code>,<code>passwd</code>,<code>userdel</code></h3><h3 id="groups-usermod"><a href="#groups-usermod" class="headerlink" title="groups,usermod"></a><code>groups</code>,<code>usermod</code></h3><h3 id="chown-chmod-1"><a href="#chown-chmod-1" class="headerlink" title="chown , chmod"></a><code>chown</code> , <code>chmod</code></h3><h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p><code>/etc/profile</code>,<code>/etc/bashrc</code>:系统全局环境变量<br><code>~/.profile</code>,<code>~/.bashrc</code>:用户目录下的私有环境变量设定</p>
+<p>profile 只能登入的时候执行一次,而bashrc执行shell脚本就会使用一次</p>
+<h2 id="系统管理及IPC资源"><a href="#系统管理及IPC资源" class="headerlink" title="系统管理及IPC资源"></a>系统管理及IPC资源</h2><h3 id="uname-proc-cpuinfo-proc-meminfo-arch-date-tzselect"><a href="#uname-proc-cpuinfo-proc-meminfo-arch-date-tzselect" class="headerlink" title="uname , /proc/cpuinfo ,/proc/meminfo,arch ,date ,tzselect"></a><code>uname</code> , <code>/proc/cpuinfo</code> ,<code>/proc/meminfo</code>,<code>arch</code> ,<code>date</code> ,<code>tzselect</code></h3><h3 id="ipcs-ulimit"><a href="#ipcs-ulimit" class="headerlink" title="ipcs , ulimit"></a><code>ipcs</code> , <code>ulimit</code></h3><p>程间通信的共享内存,信号量和消息队列</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="xdg-open"><a href="#xdg-open" class="headerlink" title="xdg-open"></a>xdg-open</h3><p>使用用户设置的软件来打开文件</p>
+<h1 id="进阶命令"><a href="#进阶命令" class="headerlink" title="进阶命令"></a>进阶命令</h1>
       
     </div>
     
@@ -563,7 +627,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -634,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#man"><span class="nav-number">1.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipcs-ipcrm"><span class="nav-number">2.</span> <span class="nav-text">ipcs , ipcrm</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本命令"><span class="nav-number">1.</span> <span class="nav-text">基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#帮助相关"><span class="nav-number">1.1.</span> <span class="nav-text">帮助相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#man-whatis-info-which"><span class="nav-number">1.1.1.</span> <span class="nav-text">man , whatis , info , which</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件操作相关"><span class="nav-number">1.2.</span> <span class="nav-text">文件操作相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mkdir-rm-mv-cp"><span class="nav-number">1.2.1.</span> <span class="nav-text">mkdir , rm  , mv , cp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd-pwd"><span class="nav-number">1.2.2.</span> <span class="nav-text">cd , pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-ls-lrt"><span class="nav-number">1.2.3.</span> <span class="nav-text">ls ,ls -lrt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-locate"><span class="nav-number">1.2.4.</span> <span class="nav-text">find , locate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-vi-head-tail-more-diff"><span class="nav-number">1.2.5.</span> <span class="nav-text">cat, vi, head, tail, more, diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#egrep-grep"><span class="nav-number">1.2.6.</span> <span class="nav-text">egrep, grep</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chown-chmod"><span class="nav-number">1.2.7.</span> <span class="nav-text">chown, chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ln"><span class="nav-number">1.2.8.</span> <span class="nav-text">ln</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#amp-amp-gt-gt-gt-lt-amp"><span class="nav-number">1.2.9.</span> <span class="nav-text">| , ; , || , &amp;&amp; , &gt; , &gt;&gt; , &lt; , &amp;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#profile-bashrc"><span class="nav-number">1.2.10.</span> <span class="nav-text">.profile , .bashrc</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理"><span class="nav-number">1.3.</span> <span class="nav-text">文本处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件"><span class="nav-number">1.3.1.</span> <span class="nav-text">find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print:查找pdf和txt文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grep-pattern-file"><span class="nav-number">1.3.2.</span> <span class="nav-text">grep pattern file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xargs"><span class="nav-number">1.3.3.</span> <span class="nav-text">xargs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">1.3.4.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#uniq"><span class="nav-number">1.3.5.</span> <span class="nav-text">uniq</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tr"><span class="nav-number">1.3.6.</span> <span class="nav-text">tr</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#磁盘管理"><span class="nav-number">1.4.</span> <span class="nav-text">磁盘管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#df-du"><span class="nav-number">1.4.1.</span> <span class="nav-text">df , du</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tar"><span class="nav-number">1.4.2.</span> <span class="nav-text">tar</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询进程"><span class="nav-number">1.5.</span> <span class="nav-text">查询进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ps-top-lsof-kill"><span class="nav-number">1.5.1.</span> <span class="nav-text">ps, top, lsof,kill</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能监控"><span class="nav-number">1.6.</span> <span class="nav-text">性能监控</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sar-free-df-du"><span class="nav-number">1.6.1.</span> <span class="nav-text">sar , free , df ,du</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络工具"><span class="nav-number">1.7.</span> <span class="nav-text">网络工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#netstat-lsof"><span class="nav-number">1.7.1.</span> <span class="nav-text">netstat , lsof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#route-ping-ifconfig-traceroute-host"><span class="nav-number">1.7.2.</span> <span class="nav-text">route ,ping ,ifconfig , traceroute ,host</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget-ssh-scp"><span class="nav-number">1.7.3.</span> <span class="nav-text">wget , ssh, scp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理工具"><span class="nav-number">1.8.</span> <span class="nav-text">用户管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#useradd-passwd-userdel"><span class="nav-number">1.8.1.</span> <span class="nav-text">useradd,passwd,userdel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#groups-usermod"><span class="nav-number">1.8.2.</span> <span class="nav-text">groups,usermod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chown-chmod-1"><span class="nav-number">1.8.3.</span> <span class="nav-text">chown , chmod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-number">1.8.4.</span> <span class="nav-text">环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统管理及IPC资源"><span class="nav-number">1.9.</span> <span class="nav-text">系统管理及IPC资源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#uname-proc-cpuinfo-proc-meminfo-arch-date-tzselect"><span class="nav-number">1.9.1.</span> <span class="nav-text">uname , /proc/cpuinfo ,/proc/meminfo,arch ,date ,tzselect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ipcs-ulimit"><span class="nav-number">1.9.2.</span> <span class="nav-text">ipcs , ulimit</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.10.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#xdg-open"><span class="nav-number">1.10.1.</span> <span class="nav-text">xdg-open</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进阶命令"><span class="nav-number">2.</span> <span class="nav-text">进阶命令</span></a></li></ol></div>
             
 
           </div>

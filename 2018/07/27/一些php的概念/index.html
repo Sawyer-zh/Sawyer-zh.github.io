@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="Enjoy coding">
 <meta property="og:description" content="php里面的一些概念,可能会忘的">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-12T16:26:25.286Z">
+<meta property="og:updated_time" content="2019-01-29T11:28:59.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一些php的概念">
 <meta name="twitter:description" content="php里面的一些概念,可能会忘的">
@@ -404,6 +404,7 @@
 <li><a href="./一些php的概念.md#declare/">declare</a></li>
 <li><a href="./一些php的概念.md#pcntl/">pcntl</a></li>
 <li><a href="./一些php的概念.md#posix/">posix</a></li>
+<li><a href="./一些php的概念.md#class_alias/">class_alias</a></li>
 </ul>
 <h3 id="static-后期静态绑定"><a href="#static-后期静态绑定" class="headerlink" title="static 后期静态绑定"></a>static 后期静态绑定</h3><ul>
 <li>1.$this,self,static,parent 的一个例子 ,php手册里面例子也非常棒</li>
@@ -562,6 +563,34 @@
 </li>
 <li>3.<a href="http://php.net/manual/zh/book.posix.php/" target="_blank" rel="noopener">reference</a></li>
 </ul>
+<h3 id="clase-alias"><a href="#clase-alias" class="headerlink" title="clase_alias"></a>clase_alias</h3><p>lumen有一个开启Facades的方法,通过class_alias把$original,和$alias指向同一个类达到简化的效果</p>
+<pre><code class="php"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">withAliases</span><span class="params">($userAliases = [])</span></span>
+<span class="function"></span>{
+    $defaults = [
+        <span class="string">'Illuminate\Support\Facades\Auth'</span> =&gt; <span class="string">'Auth'</span>,
+        <span class="string">'Illuminate\Support\Facades\Cache'</span> =&gt; <span class="string">'Cache'</span>,
+        <span class="string">'Illuminate\Support\Facades\DB'</span> =&gt; <span class="string">'DB'</span>,
+        <span class="string">'Illuminate\Support\Facades\Event'</span> =&gt; <span class="string">'Event'</span>,
+        <span class="string">'Illuminate\Support\Facades\Gate'</span> =&gt; <span class="string">'Gate'</span>,
+        <span class="string">'Illuminate\Support\Facades\Log'</span> =&gt; <span class="string">'Log'</span>,
+        <span class="string">'Illuminate\Support\Facades\Queue'</span> =&gt; <span class="string">'Queue'</span>,
+        <span class="string">'Illuminate\Support\Facades\Route'</span> =&gt; <span class="string">'Route'</span>,
+        <span class="string">'Illuminate\Support\Facades\Schema'</span> =&gt; <span class="string">'Schema'</span>,
+        <span class="string">'Illuminate\Support\Facades\URL'</span> =&gt; <span class="string">'URL'</span>,
+        <span class="string">'Illuminate\Support\Facades\Validator'</span> =&gt; <span class="string">'Validator'</span>,
+    ];
+
+    <span class="keyword">if</span> (! <span class="keyword">static</span>::$aliasesRegistered) {
+        <span class="keyword">static</span>::$aliasesRegistered = <span class="keyword">true</span>;
+
+        $merged = array_merge($defaults, $userAliases);
+
+        <span class="keyword">foreach</span> ($merged <span class="keyword">as</span> $original =&gt; $alias) {
+            class_alias($original, $alias);
+        }
+    }
+}
+</code></pre>
 
       
     </div>
@@ -624,14 +653,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/07/27/一些排序算法/" rel="next" title="一些排序算法">
+                <i class="fa fa-chevron-left"></i> 一些排序算法
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/27/一些排序算法/" rel="prev" title="一些排序算法">
-                一些排序算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/27/php文件操作/" rel="prev" title="php文件操作">
+                php文件操作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -713,7 +746,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -784,7 +817,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-后期静态绑定"><span class="nav-number">2.</span> <span class="nav-text">static 后期静态绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback-类型"><span class="nav-number">3.</span> <span class="nav-text">Callback 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closure-闭包"><span class="nav-number">4.</span> <span class="nav-text">Closure 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spl-autoload"><span class="nav-number">5.</span> <span class="nav-text">spl_autoload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflection"><span class="nav-number">6.</span> <span class="nav-text">Reflection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#declare"><span class="nav-number">7.</span> <span class="nav-text">declare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcntl"><span class="nav-number">8.</span> <span class="nav-text">pcntl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#posix"><span class="nav-number">9.</span> <span class="nav-text">posix</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-后期静态绑定"><span class="nav-number">2.</span> <span class="nav-text">static 后期静态绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback-类型"><span class="nav-number">3.</span> <span class="nav-text">Callback 类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Closure-闭包"><span class="nav-number">4.</span> <span class="nav-text">Closure 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spl-autoload"><span class="nav-number">5.</span> <span class="nav-text">spl_autoload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reflection"><span class="nav-number">6.</span> <span class="nav-text">Reflection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#declare"><span class="nav-number">7.</span> <span class="nav-text">declare</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pcntl"><span class="nav-number">8.</span> <span class="nav-text">pcntl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#posix"><span class="nav-number">9.</span> <span class="nav-text">posix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#clase-alias"><span class="nav-number">10.</span> <span class="nav-text">clase_alias</span></a></li></ol></div>
             
 
           </div>
