@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Comic Sans MS:300,300italic,400,400italic,700,700italic|Monaco:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="laravel,php,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一直不喜欢使用orm,因为换一个框架就需要重新学习一下写法.但是最近用了一下Eloquent,发现其实用起来还是非常方便,顺带看了一下他的实现.">
+<meta name="keywords" content="laravel,php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eloquent">
+<meta property="og:url" content="http://Saywer-zh.github.io/2019/03/22/Eloquent/index.html">
+<meta property="og:site_name" content="Enjoy coding">
+<meta property="og:description" content="一直不喜欢使用orm,因为换一个框架就需要重新学习一下写法.但是最近用了一下Eloquent,发现其实用起来还是非常方便,顺带看了一下他的实现.">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-03-31T11:51:01.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Eloquent">
+<meta name="twitter:description" content="一直不喜欢使用orm,因为换一个框架就需要重新学习一下写法.但是最近用了一下Eloquent,发现其实用起来还是非常方便,顺带看了一下他的实现.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Saywer-zh.github.io/2019/03/22/Eloquent/">
+
+
+
+
+
+  <title>Eloquent | Enjoy coding</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-132321799-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Enjoy coding</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Sawyer's blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/03/22/Eloquent/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Eloquent</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-22T18:55:49+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码分析/" itemprop="url" rel="index">
+                    <span itemprop="name">源码分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一直不喜欢使用orm,因为换一个框架就需要重新学习一下写法.但是最近用了一下Eloquent,发现其实用起来还是非常方便,顺带看了一下他的实现.</p>
+<a id="more"></a>
+<h1 id="开启使用Eloquent"><a href="#开启使用Eloquent" class="headerlink" title="开启使用Eloquent"></a>开启使用Eloquent</h1><p>项目使用lumen,Eloquent是可选项</p>
+<p>bootstrap 里面加上就可以了</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$app-&gt;withEloquent();</span><br></pre></td></tr></table></figure>
+<p>以下是具体执行流程:</p>
+<ul>
+<li><p>lumen Application里面db绑定了<code>registerDatabaseBindings</code></p>
+</li>
+<li><p>最终会调用<code>DatabaseServiceProvider</code>和<code>PaginationServiceProvider</code>里面的<code>register</code>和<code>boot</code>方法</p>
+</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">withEloquent</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;make(<span class="string">'db'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//'db' =&gt; 'registerDatabaseBindings',</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerDatabaseBindings</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;singleton(<span class="string">'db'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;loadComponent(</span><br><span class="line">            <span class="string">'database'</span>, [</span><br><span class="line">                <span class="string">'Illuminate\Database\DatabaseServiceProvider'</span>,</span><br><span class="line">                <span class="string">'Illuminate\Pagination\PaginationServiceProvider'</span>,</span><br><span class="line">            ], <span class="string">'db'</span></span><br><span class="line">        );</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">loadComponent</span><span class="params">($config, $providers, $return = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;configure($config);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> ((<span class="keyword">array</span>) $providers <span class="keyword">as</span> $provider) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;register($provider);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;make($return ?: $config);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="DatabaseServiceProvider"><a href="#DatabaseServiceProvider" class="headerlink" title="DatabaseServiceProvider"></a>DatabaseServiceProvider</h1><p>可以看出比较关键的几个类<code>ConnectionFactory</code>,<code>DatabaseManager</code>,<code>Model</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DatabaseServiceProvider</span> <span class="keyword">extends</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Bootstrap the application events.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">boot</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Model::setConnectionResolver(<span class="keyword">$this</span>-&gt;app[<span class="string">'db'</span>]);</span><br><span class="line"></span><br><span class="line">        Model::setEventDispatcher(<span class="keyword">$this</span>-&gt;app[<span class="string">'events'</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the service provider.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">register</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Model::clearBootedModels();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;registerConnectionServices();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;registerEloquentFactory();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;registerQueueableEntityResolver();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the primary database bindings.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerConnectionServices</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// The connection factory is used to create the actual connection instances on</span></span><br><span class="line">        <span class="comment">// the database. We will inject the factory into the manager so that it may</span></span><br><span class="line">        <span class="comment">// make the connections while they are actually needed and not of before.</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">'db.factory'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ConnectionFactory($app);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The database manager is used to resolve various connections, since multiple</span></span><br><span class="line">        <span class="comment">// connections might be managed. It also implements the connection resolver</span></span><br><span class="line">        <span class="comment">// interface which may be used by other components requiring connections.</span></span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(<span class="string">'db'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> DatabaseManager($app, $app[<span class="string">'db.factory'</span>]);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;bind(<span class="string">'db.connection'</span>, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> $app[<span class="string">'db'</span>]-&gt;connection();</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the Eloquent factory instance in the container.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerEloquentFactory</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(FakerGenerator::class, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> FakerFactory::create($app[<span class="string">'config'</span>]-&gt;get(<span class="string">'app.faker_locale'</span>, <span class="string">'en_US'</span>));</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(EloquentFactory::class, <span class="function"><span class="keyword">function</span> <span class="params">($app)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> EloquentFactory::construct(</span><br><span class="line">                $app-&gt;make(FakerGenerator::class), <span class="keyword">$this</span>-&gt;app-&gt;databasePath(<span class="string">'factories'</span>)</span><br><span class="line">            );</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Register the queueable entity resolver implementation.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">registerQueueableEntityResolver</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;app-&gt;singleton(EntityResolver::class, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> QueueEntityResolver;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="ConnectionFactory"><a href="#ConnectionFactory" class="headerlink" title="ConnectionFactory"></a>ConnectionFactory</h2><p>数据库连接工厂,可以根据配置,获得一个数据库链接,支持<code>mysql</code>,<code>sqlite</code>…等等</p>
+<p>具体有<code>Connector</code>和<code>Connection</code>以及这两个类的子类</p>
+<p>Connection实现了ConnectionIntereface规定的增删改查等等的一些操作,具体使用了PDOStatement类,由<code>PDO::prepare()</code>获得</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">createSingleConnection</span><span class="params">(array $config)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $pdo = <span class="keyword">$this</span>-&gt;createPdoResolver($config);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;createConnection(</span><br><span class="line">        $config[<span class="string">'driver'</span>], $pdo, $config[<span class="string">'database'</span>], $config[<span class="string">'prefix'</span>], $config</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>具体PDO实例获取,会到Connector里面的<code>createPdoConnection</code>方法中</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">createPdoConnection</span><span class="params">($dsn, $username, $password, $options)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (class_exists(PDOConnection::class) &amp;&amp; ! <span class="keyword">$this</span>-&gt;isPersistentConnection($options)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> PDOConnection($dsn, $username, $password, $options);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> PDO($dsn, $username, $password, $options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="DatabaseManager"><a href="#DatabaseManager" class="headerlink" title="DatabaseManager"></a>DatabaseManager</h2><p>在这里app里面<code>db</code>被绑上了单例的DatabaseManager用于管理用<code>ConnectionFactory</code>产生的连接</p>
+<p>DatabaseManager里面有一个connection成员数组用来保存数据库连接,有一个ConnectionFactory成员用来产生新的连接</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get a database connection instance.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $name</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \Illuminate\Database\Connection</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">connection</span><span class="params">($name = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">list</span>($database, $type) = <span class="keyword">$this</span>-&gt;parseConnectionName($name);</span><br><span class="line"></span><br><span class="line">    $name = $name ?: $database;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we haven't created this connection, we'll create it based on the config</span></span><br><span class="line">    <span class="comment">// provided in the application. Once we've created the connections we will</span></span><br><span class="line">    <span class="comment">// set the "fetch mode" for PDO which determines the query return types.</span></span><br><span class="line">    <span class="keyword">if</span> (! <span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;connections[$name])) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;connections[$name] = <span class="keyword">$this</span>-&gt;configure(</span><br><span class="line">            <span class="keyword">$this</span>-&gt;makeConnection($database), $type</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;connections[$name];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="boot"><a href="#boot" class="headerlink" title="boot"></a>boot</h2><p>boot方法为EloquentModel设置了连接处理(DatabaseManager)和事件处理的类</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Configure the PDO prepared statement.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  \PDOStatement  $statement</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \PDOStatement</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">prepared</span><span class="params">(PDOStatement $statement)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $statement-&gt;setFetchMode(<span class="keyword">$this</span>-&gt;fetchMode);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;event(<span class="keyword">new</span> Events\StatementPrepared(</span><br><span class="line">        <span class="keyword">$this</span>, $statement</span><br><span class="line">    ));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $statement;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>分析一下比如<code>Model::with()-&gt;where(...)-&gt;get()</code>实际发生了什么?</p>
+<p>首先model里面有个类成员,<code>$resolver</code>,在<code>boot()</code>方法里面把实例化的<code>DatabaseManager</code>设置为了<code>$resolver</code>.</p>
+<p><code>__callStatic</code>会先实例化自己,再调用自己的成员方法或者<code>__call</code>方法.</p>
+<p><code>$this-&gt;newQuery</code>是<code>Eloquent\Builder</code>的实例,他实际上是<code>Query\Builder</code>装饰而来.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set the connection resolver instance.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  \Illuminate\Database\ConnectionResolverInterface  $resolver</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">setConnectionResolver</span><span class="params">(Resolver $resolver)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span>::$resolver = $resolver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Handle dynamic method calls into the model.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $method</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $parameters</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span><span class="params">($method, $parameters)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (in_array($method, [<span class="string">'increment'</span>, <span class="string">'decrement'</span>])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;$method(...$parameters);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;newQuery()-&gt;$method(...$parameters);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Handle dynamic static method calls into the method.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $method</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $parameters</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">__callStatic</span><span class="params">($method, $parameters)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">new</span> <span class="keyword">static</span>)-&gt;$method(...$parameters);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法,根据<code>$table</code>成员返回<code>Eloquent\Query</code>,可以看出,<code>setModel</code>方法里面,把<code>Database\Query</code>里面的<code>from</code>成员设置为<code>Eloquent\Model</code>里面定义的<code>$table</code>,这样查询的时候就知道从那张表查询了<code>Eloquent\Query</code>里面也定义了一个<code>__call</code>方法,具体就是会调用<code>Database\Query</code>或者<code>trait</code>里面的方法</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get a new query builder for the model's table.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \Illuminate\Database\Eloquent\Builder</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">newQuery</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;registerGlobalScopes(<span class="keyword">$this</span>-&gt;newQueryWithoutScopes());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set a model instance for the model being queried.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  \Illuminate\Database\Eloquent\Model  $model</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> $this</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setModel</span><span class="params">(Model $model)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;model = $model;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;query-&gt;from($model-&gt;getTable());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>with</code>的实现,大致就是先把关系放进<code>Eloquent\Query</code>的<code>eagerLoad</code>成员里面,</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Begin querying a model with eager loading.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array|string  $relations</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \Illuminate\Database\Eloquent\Builder|static</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">with</span><span class="params">($relations)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">new</span> <span class="keyword">static</span>)-&gt;newQuery()-&gt;with(</span><br><span class="line">        is_string($relations) ? func_get_args() : $relations</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set the relationships that should be eager loaded.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  mixed  $relations</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> $this</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">with</span><span class="params">($relations)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $eagerLoad = <span class="keyword">$this</span>-&gt;parseWithRelations(is_string($relations) ? func_get_args() : $relations);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;eagerLoad = array_merge(<span class="keyword">$this</span>-&gt;eagerLoad, $eagerLoad);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Execute the query as a "select" statement.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $columns</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> \Illuminate\Database\Eloquent\Collection|static[]</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($columns = [<span class="string">'*'</span>])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $builder = <span class="keyword">$this</span>-&gt;applyScopes();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we actually found models we will also eager load any relationships that</span></span><br><span class="line">    <span class="comment">// have been specified as needing to be eager loaded, which will solve the</span></span><br><span class="line">    <span class="comment">// n+1 query issue for the developers to avoid running a lot of queries.</span></span><br><span class="line">    <span class="keyword">if</span> (count($models = $builder-&gt;getModels($columns)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        $models = $builder-&gt;eagerLoadRelations($models);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $builder-&gt;getModel()-&gt;newCollection($models);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Eagerly load the relationship on a set of models.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $models</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $name</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  \Closure  $constraints</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">eagerLoadRelation</span><span class="params">(array $models, $name, Closure $constraints)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// First we will "back up" the existing where conditions on the query so we can</span></span><br><span class="line">    <span class="comment">// add our eager constraints. Then we will merge the wheres that were on the</span></span><br><span class="line">    <span class="comment">// query back to it in order that any where conditions might be specified.</span></span><br><span class="line">    $relation = <span class="keyword">$this</span>-&gt;getRelation($name);</span><br><span class="line"></span><br><span class="line">    $relation-&gt;addEagerConstraints($models);</span><br><span class="line"></span><br><span class="line">    $constraints($relation);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Once we have the results, we just match those back up to their parent models</span></span><br><span class="line">    <span class="comment">// using the relationship instance. Then we just return the finished arrays</span></span><br><span class="line">    <span class="comment">// of models which have been eagerly hydrated and are readied for return.</span></span><br><span class="line">    <span class="keyword">return</span> $relation-&gt;match(</span><br><span class="line">        $relation-&gt;initRelation($models, $name),</span><br><span class="line">        $relation-&gt;getEager(), $name</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里以<code>hasOneOrMany</code>为例,实际上,执行的是<code>whereIn</code>,这里既不是通过<code>join</code>,也不是通过循环一条一条查询的.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Set the constraints for an eager load of the relation.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $models</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addEagerConstraints</span><span class="params">(array $models)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;query-&gt;whereIn(</span><br><span class="line">        <span class="keyword">$this</span>-&gt;foreignKey, <span class="keyword">$this</span>-&gt;getKeys($models, <span class="keyword">$this</span>-&gt;localKey)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里<code>parseWithRelations</code>的时候,<code>constraint</code>是一个闭包</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Parse a list of relations into individuals.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $relations</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">parseWithRelations</span><span class="params">(array $relations)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $results = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> ($relations <span class="keyword">as</span> $name =&gt; $constraints) &#123;</span><br><span class="line">        <span class="comment">// If the "relation" value is actually a numeric key, we can assume that no</span></span><br><span class="line">        <span class="comment">// constraints have been specified for the eager load and we'll just put</span></span><br><span class="line">        <span class="comment">// an empty Closure with the loader so that we can treat all the same.</span></span><br><span class="line">        <span class="keyword">if</span> (is_numeric($name)) &#123;</span><br><span class="line">            $name = $constraints;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">list</span>($name, $constraints) = Str::contains($name, <span class="string">':'</span>)</span><br><span class="line">                        ? <span class="keyword">$this</span>-&gt;createSelectWithConstraint($name)</span><br><span class="line">                        : [$name, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">                            <span class="comment">//</span></span><br><span class="line">                        &#125;];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// We need to separate out any nested includes. Which allows the developers</span></span><br><span class="line">        <span class="comment">// to load deep relationships using "dots" without stating each level of</span></span><br><span class="line">        <span class="comment">// the relationship with its own key in the array of eager load names.</span></span><br><span class="line">        $results = <span class="keyword">$this</span>-&gt;addNestedWiths($name, $results);</span><br><span class="line"></span><br><span class="line">        $results[$name] = $constraints;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $results;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Create a constraint to select the given columns for the relation.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $name</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">createSelectWithConstraint</span><span class="params">($name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> [explode(<span class="string">':'</span>, $name)[<span class="number">0</span>], <span class="function"><span class="keyword">function</span> <span class="params">($query)</span> <span class="title">use</span> <span class="params">($name)</span> </span>&#123;</span><br><span class="line">        $query-&gt;select(explode(<span class="string">','</span>, explode(<span class="string">':'</span>, $name)[<span class="number">1</span>]));</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Match the eagerly loaded results to their many parents.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array   $models</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  \Illuminate\Database\Eloquent\Collection  $results</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $relation</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $type</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> array</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">matchOneOrMany</span><span class="params">(array $models, Collection $results, $relation, $type)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $dictionary = <span class="keyword">$this</span>-&gt;buildDictionary($results);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Once we have the dictionary we can simply spin through the parent models to</span></span><br><span class="line">    <span class="comment">// link them up with their children using the keyed dictionary to make the</span></span><br><span class="line">    <span class="comment">// matching very convenient and easy work. Then we'll just return them.</span></span><br><span class="line">    <span class="keyword">foreach</span> ($models <span class="keyword">as</span> $model) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>($dictionary[$key = $model-&gt;getAttribute(<span class="keyword">$this</span>-&gt;localKey)])) &#123;</span><br><span class="line">            $model-&gt;setRelation(</span><br><span class="line">                $relation, <span class="keyword">$this</span>-&gt;getRelationValue($dictionary, $key, $type)</span><br><span class="line">            );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $models;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行到这里,<code>model</code>里面<code>$relation</code>数组里面的关系就有了数据,看看<code>toArray</code>方法,果然会把这个结果<code>merge</code>进去</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">toArray</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> array_merge(<span class="keyword">$this</span>-&gt;attributesToArray(), <span class="keyword">$this</span>-&gt;relationsToArray());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上基本就是<code>Model::with(..)-&gt;where()-&gt;get()-&gt;toArray()</code>的具体流程.主要明白了<code>with</code>是通过<code>whereIn</code>来查询的,天真的我一直以为用的是<code>join</code>来实现的</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="Sawyer wechat" style="width: 200px; max-width: 100%;">
+    <div>subscribe my public wechat account</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>多谢支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Sawyer Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/laravel/" rel="tag"># laravel</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/23/Lumen源码阅读/" rel="next" title="Lumen源码阅读">
+                <i class="fa fa-chevron-left"></i> Lumen源码阅读
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="Sawyer">
+            
+              <p class="site-author-name" itemprop="name">Sawyer</p>
+              <p class="site-description motion-element" itemprop="description">the ability to see the machine as more than when you were first led up to it, that you can make it more.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Sawyer-zh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:254091355@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#开启使用Eloquent"><span class="nav-number">1.</span> <span class="nav-text">开启使用Eloquent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DatabaseServiceProvider"><span class="nav-number">2.</span> <span class="nav-text">DatabaseServiceProvider</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ConnectionFactory"><span class="nav-number">2.1.</span> <span class="nav-text">ConnectionFactory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DatabaseManager"><span class="nav-number">2.2.</span> <span class="nav-text">DatabaseManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boot"><span class="nav-number">2.3.</span> <span class="nav-text">boot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model"><span class="nav-number">2.3.1.</span> <span class="nav-text">Model</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sawyer</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '3b8718796c83bdd9e7b0',
+          clientSecret: 'b76191d351c4c8aed30ee46f145eb651e3e18582',
+          repo: 'Sawyer-zh.github.io',
+          owner: 'Sawyer-zh',
+          admin: ['Sawyer-zh'],
+          id: location.pathname,
+          labels: 'gitalk'.split(',').filter(l => l),
+          perPage: 15,
+          pagerDirection: 'last',
+          createIssueManually: false,
+          distractionFreeMode: false
+        })
+
+        gitalk.render('gitalk-container')           
+       </script>
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

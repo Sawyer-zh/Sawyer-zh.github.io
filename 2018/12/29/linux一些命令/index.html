@@ -119,7 +119,7 @@
 <meta property="og:site_name" content="Enjoy coding">
 <meta property="og:description" content="平时用到的,感觉会忘记的">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-23T05:16:21.714Z">
+<meta property="og:updated_time" content="2019-03-13T11:48:08.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux一些命令">
 <meta name="twitter:description" content="平时用到的,感觉会忘记的">
@@ -411,12 +411,13 @@
 <p><code>man -k keyword</code>:要是部分命令记不全了可以使用这个.如<code>man -k ipc</code></p>
 <p><code>whatis</code>:一行简介</p>
 <p><code>info</code>:详细文档</p>
-<h2 id="文件操作相关"><a href="#文件操作相关" class="headerlink" title="文件操作相关"></a>文件操作相关</h2><h3 id="mkdir-rm-mv-cp"><a href="#mkdir-rm-mv-cp" class="headerlink" title="mkdir , rm  , mv , cp"></a>mkdir , rm  , mv , cp</h3><h3 id="cd-pwd"><a href="#cd-pwd" class="headerlink" title="cd , pwd"></a>cd , pwd</h3><h3 id="ls-ls-lrt"><a href="#ls-ls-lrt" class="headerlink" title="ls ,ls -lrt"></a>ls ,ls -lrt</h3><h3 id="find-locate"><a href="#find-locate" class="headerlink" title="find , locate"></a>find , locate</h3><p><code>find ./ -name &quot;*.c&quot; -exec rm {}</code>:递归当前目录及子目录删除<code>.c</code>文件</p>
+<h2 id="文件操作相关"><a href="#文件操作相关" class="headerlink" title="文件操作相关"></a>文件操作相关</h2><h3 id="mkdir-rm-mv-cp"><a href="#mkdir-rm-mv-cp" class="headerlink" title="mkdir , rm  , mv , cp"></a>mkdir , rm  , mv , cp</h3><h3 id="cd-pwd"><a href="#cd-pwd" class="headerlink" title="cd , pwd"></a>cd , pwd</h3><h3 id="ls-ls-lrt"><a href="#ls-ls-lrt" class="headerlink" title="ls ,ls -lrt"></a>ls ,ls -lrt</h3><h3 id="find-locate"><a href="#find-locate" class="headerlink" title="find , locate"></a>find , locate</h3><p><code>find ./ -name &quot;*.c&quot; -exec rm {} \</code>:递归当前目录及子目录删除<code>.c</code>文件</p>
 <p><code>locate string</code>: find 是实时查找,locate是根据文件索引信息</p>
 <p><code>updatedb</code></p>
 <h3 id="cat-vi-head-tail-more-diff"><a href="#cat-vi-head-tail-more-diff" class="headerlink" title="cat, vi, head, tail, more, diff"></a>cat, vi, head, tail, more, diff</h3><p><code>tail -f</code></p>
 <h3 id="egrep-grep"><a href="#egrep-grep" class="headerlink" title="egrep, grep"></a>egrep, grep</h3><h3 id="chown-chmod"><a href="#chown-chmod" class="headerlink" title="chown, chmod"></a>chown, chmod</h3><h3 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h3><h3 id="amp-amp-gt-gt-gt-lt-amp"><a href="#amp-amp-gt-gt-gt-lt-amp" class="headerlink" title="| , ; , || , &amp;&amp; , &gt; , &gt;&gt; , &lt; , &amp;"></a>| , ; , || , &amp;&amp; , &gt; , &gt;&gt; , &lt; , &amp;</h3><h3 id="profile-bashrc"><a href="#profile-bashrc" class="headerlink" title=".profile , .bashrc"></a>.profile , .bashrc</h3><p><code>export PATH</code></p>
-<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><h3 id="find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件"><a href="#find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件" class="headerlink" title="find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print:查找pdf和txt文件"></a><code>find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print</code>:查找pdf和txt文件</h3><ul>
+<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><h3 id="find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件"><a href="#find-name-quot-txt-quot-o-name-quot-pdf-quot-print-查找pdf和txt文件" class="headerlink" title="find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print:查找pdf和txt文件"></a><code>find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \) -print</code>:查找pdf和txt文件</h3><p><code>find . -name &quot;*.php&quot; -exec sed -i &quot;s/Chongdian/Wawa/&quot; {} \</code>:<code>用在替换命名空间上</code></p>
+<ul>
 <li><p>定制:</p>
 <ul>
 <li><code>-maxdepth 1</code>:</li>
@@ -627,7 +628,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
