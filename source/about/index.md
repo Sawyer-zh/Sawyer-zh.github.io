@@ -32,7 +32,7 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
 # 个人信息
 
  - 张航/男/1992 
- - 硕士/中国石油大学(北京) 油气田开放工程系 
+ - 硕士/中国石油大学(北京) 油气田开发工程系 
  - 工作年限：3年
  - 技术博客：http://Sawyer-zh.github.io / http://keepsunshine.cn
  - Github：https://github.com/Sawyer-zh
@@ -75,7 +75,7 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
     
   - 利用信号量和共享内存保证Android端每部手机在使用的过程中无法被其他请求占用
   - 利用adb forward 连接了linux服务器和每个android设备
-  - 利用socket链接使本地服务器与app通信
+  - 利用socket连接使本地服务器与app通信
   - app通过拦截notification来获得支付金额从而返回本地服务器
   - 通过openVPN连接生产服务器和本地服务器,从而可以使用RPC远程调用本地服务方法
 
@@ -103,7 +103,7 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
 
 - 遇到问题
 
-  20W的标,预约8万,在剩余可投2300左右的时候,两个用户同时投了2300,都成功了,导致预约用户实际可投小于预约金额
+  20W的标,预约8万,在剩余可投2356左右的时候,两个用户同时投了2356,都成功了,导致预约用户实际可投小于预约金额
 
 - 解决问题
 
@@ -146,7 +146,7 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
 
 ## 开源项目
 
- - [一个股票交易助手](https://github.com/Sawyer-zh/trader)
+- [一个股票交易助手](https://github.com/Sawyer-zh/trader)
 
 ## 技术文章
 

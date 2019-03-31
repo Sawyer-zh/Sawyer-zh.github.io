@@ -60,3 +60,8 @@ GROUP BY
 
 - `mysqldump -h xxx -uxx -p dbname > name.dump`:备份, `-d`:只导出结构  `dbtable`:指定表
 - `mysql dbname < name.dump`:恢复 
+
+### mysql复制表
+
+- create table table1 like table2;
+- create table table1 select * from table2;

@@ -48,7 +48,7 @@ categories:
 
 ### find , locate
 
-`find ./ -name "*.c" -exec rm {}`:递归当前目录及子目录删除`.c`文件
+`find ./ -name "*.c" -exec rm {} \`:递归当前目录及子目录删除`.c`文件
 
 `locate string`: find 是实时查找,locate是根据文件索引信息
 
@@ -75,6 +75,8 @@ categories:
 ## 文本处理
 
 ### `find . \( -name "*.txt" -o -name "*.pdf" \) -print`:查找pdf和txt文件
+
+`find . -name "*.php" -exec sed -i "s/Chongdian/Wawa/" {} \`:`用在替换命名空间上`
 
 - 定制:
   - `-maxdepth 1`:
