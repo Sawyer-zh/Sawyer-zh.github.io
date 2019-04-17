@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta name="description" content="本文是一篇译作,觉得可以解释清楚指针的概念.这里是原文">
 <meta name="keywords" content="IT,互联网">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php源码阅读">
-<meta property="og:url" content="http://Saywer-zh.github.io/2019/01/08/php源码阅读/index.html">
+<meta property="og:title" content="指针是什么">
+<meta property="og:url" content="http://Saywer-zh.github.io/2019/04/14/指针是什么/index.html">
 <meta property="og:site_name" content="Enjoy coding">
-<meta property="og:description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta property="og:description" content="本文是一篇译作,觉得可以解释清楚指针的概念.这里是原文">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-12T16:26:25.286Z">
+<meta property="og:updated_time" content="2019-04-15T12:01:30.372Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="php源码阅读">
-<meta name="twitter:description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta name="twitter:title" content="指针是什么">
+<meta name="twitter:description" content="本文是一篇译作,觉得可以解释清楚指针的概念.这里是原文">
 
 
 
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="http://Saywer-zh.github.io/2019/01/08/php源码阅读/">
+  <link rel="canonical" href="http://Saywer-zh.github.io/2019/04/14/指针是什么/">
 
 
 
 
 
-  <title>php源码阅读 | Enjoy coding</title>
+  <title>指针是什么 | Enjoy coding</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/01/08/php源码阅读/">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/04/14/指针是什么/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sawyer">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">php源码阅读</h1>
+          <h1 class="post-title" itemprop="name headline">指针是什么</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T07:37:50+08:00">
-                2019-01-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-14T20:35:33+08:00">
+                2019-04-14
               </time>
             
 
@@ -371,7 +371,50 @@
       
 
       
-        
+        <p>本文是一篇译作,觉得可以解释清楚指针的概念.这里是<a href="http://www.cs.ucsb.edu/~mikec/cs16/misc/ptrtut12/ch1x.htm" target="_blank" rel="noopener">原文</a></p>
+<a id="more"></a>
+<p>指针的概念是C语言初学者觉得困难的事情之一.这个教程的目的就是为这些初学者提供指针的介绍和使用.</p>
+<p>我发现大多数情况初学者对于指针有困难的主要原因是他们对于变量(C语言里面的变量)的了解不够.因此,我们从讨论C变量开始.</p>
+<p>程序里面的变量就是一个有名字,并且值可以变化的东西.编译器和链接器处理变量的方式就是为它在计算机里面分配一个具体的内存块,这个内存块用来保存变量的值.这个内存块的大小取决于变量的取值范围.例如,在32位PC,整型变量的大小是4字节.而在老的16位PC上是2个字节.在C里面,一个变量类型的大小不必在所有机器上都一样.而且,在C里面有不止一种类型的整型变量.在任何一个关于C基础资料里面你都可以了解到有整型,长整型,短整型.这个文档假定使用32位系统,整型变量大小是4个字节.</p>
+<p>如果你想知道你的系统下不同类型的整型变量的大小,运行一下下面的代码将会得到那些信息.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"size of a short is %d\n"</span> , <span class="keyword">sizeof</span>(<span class="keyword">short</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"size of a int is %d\n"</span> , <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"size of a long is %d\n"</span> , <span class="keyword">sizeof</span>(<span class="keyword">long</span>));</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当我们申明一个变量时,我们告诉编译器两件事:变量名称和变量类型.例如,我们通过写如下代码申明一个变量名称为k,变量类型为整型的变量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> k;</span><br></pre></td></tr></table></figure>
+<p>编译器看到语句的<code>int</code>部分的时候,它(在PC上)留出了4个字节的内存来保存整数的值.同时它也建了一个符号表.在这个表里面,编译器把符号<code>k</code>和那被分配的4个字节在内存里面的相对地址添加进去.</p>
+<p>因此,之后如果我们写下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">k=<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<p>我们期望在运行的时候,当这条语句被执行的时候,值2将会被填进为保存<code>k</code>的值所预留的内存地址.在C里面我们指一个变量比如整数<code>k</code>为一个<code>对象</code>.</p>
+<p>在某种程度上,有两个<code>值</code>与对象<code>k</code>有关.一个是存储在那里的整数的值(在上面这个例子里面是2),另外一个是内存地址,即k的地址.一些资料把这两个值分别称为右值(rvalue)和左值(lvalue).</p>
+<p>在一些语言里面,左值放在赋值操作<code>=</code>的左边,右值放在赋值操作的右边,上个例子中的2.右值不能放到赋值操作的左边.所以<code>2=k;</code>是非法的.</p>
+<p>实际上,根据<code>K&amp;RII(197页)</code>(C程序设计语言)可知上面的左值定义对C而言有点区别.</p>
+<blockquote>
+<p>An object is a named region of storage; an lvalue is an expression referring to an object</p>
+</blockquote>
+<blockquote>
+<p>对象是一块命名的存储区; 左值是引用到一个对象的一个表达式</p>
+</blockquote>
+<p>然而,在此时,上述原始引用的定义已经足够.当我们更加熟悉指针之后,再去讨论更多的细节.</p>
+<p>好了,现在思考:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> j,k;</span><br><span class="line"></span><br><span class="line">k=<span class="number">2</span>;</span><br><span class="line">j=<span class="number">7</span>; &lt;-- line <span class="number">1</span></span><br><span class="line">k=j; &lt;-- line <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>以上,编译器在第一行把变量j解释为j的地址(j的左值),然后把值7填到这个地址里面.然而,在第二行,j被解释为他的右值(因为它在赋值操作<code>=</code>的右边).也就是说,这里的j指代是为j分配的内存里面值,在这里是7.因此7被复制到左值k的地址指向的内存里面.</p>
+<p>在所有的上面的例子里面,我们使用4个字节的整型,所以所有从一个地址复制到另外一个地址的右值复制,都复制了4个字节.如果我们使用的是两个字节的整型,我们将会复制两个字节.</p>
+<p>现在,我们说我们有某种原因需要一个变量来保存左值(一个地址).保存这样的值所需的大小取决与系统.对于旧的总共64k内存的台式机,内存中的任何一个地址,使用两个字节都可以找到.更大内存的计算机需要更多的空间来存放一个地址.实际需要的空间大小并不是特别重要,只要我们有一种方式告诉编译器,我们需要存储的是一个地址.</p>
+<p>这样的变量就是指针变量(理由是我们希望这将会变得更加清晰).在C里面,我们通过在变量名前面加上一个星号来定义一个指针变量,我们同样也会给定一个类型,这个类型是我们存在指针变量里面的地址所保存数据的类型.例如,考虑如下变量申明:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *ptr;</span><br></pre></td></tr></table></figure>
+<p><code>ptr</code>是我们的变量名称(和<code>k</code>是我们的整型变量名称一样).<code>*</code>告诉编译器,我们需要的是一个指针变量,即需要分配多少字节来保存内存中的一个地址.<code>int</code>表明我们打算使用指针变量来保存一个整数的地址.这样的一个指针被成为指向整数的指针.然后,我们发现当我们写<code>int k;</code>我们没有给<code>k</code>分配一个值.如果这个定义是在任何<code>ANSI</code>兼容的编译器的函数外面申明的话,它会被初始化为0.类似地,<code>ptr</code>也没有值,即我们在上述申明中,我们没有保存任何地址,这种情况,类似的,如果申明在任何函数的外边,它会被初始化为不指向任何C对象和函数的值.这种初始化的方式的指针称为<code>null</code>(空)指针.</p>
+<p>实际上空指针可能不等于0,因为它取决于具体的系统.为了使源代码能够在不同编译器不同系统下保持兼容,使用一个宏NULL来指代空指针.因此,使用NULL宏设置一个指针的值可以保证指针是空指针如<code>ptr=NULL;</code>.类似的我们可以像测试一个整数<code>if(k==0)</code>是不是0一样来测试一个指针<code>if(ptr==NULL)</code>是不是空指针</p>
+<p>但是,回到使用我们的新变量<code>ptr</code>上.假设我们想把整型变量k的地址存进<code>ptr</code>.我们使用<code>&amp;</code>操作符:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ptr=&amp;k;</span><br></pre></td></tr></table></figure>
+<p><code>&amp;</code>操作符取了k的左值(地址),即使k是在赋值操作符<code>=</code>的右边,然后把内容复制到我们的指针<code>ptr</code>里面.现在ptr称为指向k.现在让我们耐心说完,只有最后一个符号需要讨论了.</p>
+<p><code>dereferencing operator</code>(解引用符)是<code>*</code>,使用如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*ptr = <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+<p>将会把7复制到ptr所指向的地址.因此,如果ptr指向k(包含k的地址),上述语句会把k的值设置为7.那就是说,当我们这样使用<code>*</code>时,我们使用的是指针所指向的地址的值,而不是指针本身的值(地址)</p>
+<p>类似的,我们可以这样写:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*ptr);</span><br></pre></td></tr></table></figure>
+<p>来通过ptr向屏幕打印出他指向地址所存的值.</p>
+<p>运行如下程序,然后认真审查代码和输出,可以看明白以上这些东西是如何运作</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> j,k;</span><br><span class="line"><span class="keyword">int</span> *ptr;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    j=<span class="number">1</span>;</span><br><span class="line">    k=<span class="number">2</span>;</span><br><span class="line">    ptr = &amp;k;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"j has the value %d and is stored at %p\n"</span> , j,(<span class="keyword">void</span> *) &amp;j);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"k has the value %d and is stored at %p\n"</span> , k,(<span class="keyword">void</span> *) &amp;k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"ptr has the value %p and is stored at %p\n"</span> , ptr,(<span class="keyword">void</span> *) &amp;ptr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"the value integer pointed to by ptr is %d\n"</span> , *ptr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -427,8 +470,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/29/linux一些命令/" rel="next" title="linux一些命令">
-                <i class="fa fa-chevron-left"></i> linux一些命令
+              <a href="/2019/03/22/Eloquent/" rel="next" title="Eloquent">
+                <i class="fa fa-chevron-left"></i> Eloquent
               </a>
             
           </div>
@@ -436,10 +479,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/09/增长黑客/" rel="prev" title="增长黑客">
-                增长黑客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
