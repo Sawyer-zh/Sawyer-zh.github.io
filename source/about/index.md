@@ -25,7 +25,7 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
 
 - 手机：15001332302(北京)/13827474582(深圳)  最优联系时间周末,节假日
 - Email：sawyerzhang2017@gmail.com / 254091355@qq.com 
-- 微信号：zh--007
+- 微信号：`zh--007`
 
 ---
 
@@ -152,6 +152,10 @@ blog:Sawyer-zh.github.io / www.keepsunshine.cn
 
 - [动态规划在工作中的一个应用](http://keepsunshine.cn/2018/07/29/dp/#more)
 - [一个解决支付宝支付的不靠谱手段](http://keepsunshine.cn/2018/11/29/%E5%B0%8F%E7%A8%8B%E5%BA%8F,app,%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/#more) 
+
+## 翻译文章
+
+- [指针是什么](http://keepsunshine.cn/2019/04/14/%E6%8C%87%E9%92%88%E6%98%AF%E4%BB%80%E4%B9%88/)
 
 # 技能清单
 
