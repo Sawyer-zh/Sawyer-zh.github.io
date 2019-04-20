@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta name="description" content="记录一下事务的隔离级别">
 <meta name="keywords" content="IT,互联网">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://Saywer-zh.github.io/categories/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事务隔离级别">
+<meta property="og:url" content="http://Saywer-zh.github.io/2019/04/19/事务隔离级别/index.html">
 <meta property="og:site_name" content="Enjoy coding">
-<meta property="og:description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta property="og:description" content="记录一下事务的隔离级别">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-12T16:26:25.286Z">
+<meta property="og:updated_time" content="2019-04-19T17:27:35.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="the ability to see the machine as more than when you were first led up to it, that you can make it more.">
+<meta name="twitter:title" content="事务隔离级别">
+<meta name="twitter:description" content="记录一下事务的隔离级别">
 
 
 
@@ -152,13 +152,13 @@
 
 
 
-  <link rel="canonical" href="http://Saywer-zh.github.io/categories/">
+  <link rel="canonical" href="http://Saywer-zh.github.io/2019/04/19/事务隔离级别/">
 
 
 
 
 
-  <title>categories | Enjoy coding</title>
+  <title>事务隔离级别 | Enjoy coding</title>
   
 
 
@@ -292,40 +292,417 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/04/19/事务隔离级别/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                5 categories in total
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/产品思维/">产品思维</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/奇葩案例/">奇葩案例</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码分析/">源码分析</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a><span class="category-list-count">10</span></li></ul>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">事务隔离级别</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-19T20:08:50+08:00">
+                2019-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>记录一下事务的隔离级别</p>
+<a id="more"></a>
+<h1 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h1><p><code>set [session|global] transaction isolation level {read uncommitted | read committed | repeatable read | serializable}</code>:设置事务隔离级别</p>
+<p><code>select @@global.tx_isolation</code>:<code>global</code>可以去掉或者改成<code>session</code></p>
+<p>mysql默认的隔离级别是<code>repeatable read</code></p>
+<h1 id="各个级别会出现的问题"><a href="#各个级别会出现的问题" class="headerlink" title="各个级别会出现的问题"></a>各个级别会出现的问题</h1><table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读(Dirty Read)</th>
+<th>不可重复读(NonRepeatable Read)</th>
+<th>幻读(Phantom Read) </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>读未提交(Read Uncommitted)</td>
+<td>可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>读已提交(Read Committed)</td>
+<td>不可能</td>
+<td>可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可重复读(Repeatable Read)</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>可能</td>
+</tr>
+<tr>
+<td>可串行化(Serializable)</td>
+<td>不可能</td>
+<td>不可能</td>
+<td>不可能</td>
+</tr>
+</tbody>
+</table>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>t_user表</p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>两个客户端:c1,c2</p>
+<h2 id="脏读"><a href="#脏读" class="headerlink" title="脏读"></a>脏读</h2><p>两个事务同时开启,其中一个事务对表中数据进行了修改,但未提交.这时被另外一个事务查询到了.即读到了未提交的<code>脏数据</code></p>
+<p>c1:</p>
+<p><code>select @@tx_isolation;</code></p>
+<h2 id="tx-isolation"><a href="#tx-isolation" class="headerlink" title="@@tx_isolation"></a>@@tx_isolation</h2><p>REPEATABLE-READ</p>
+<p><code>set transaction isolation level read uncommitted;</code></p>
+<p>c2:</p>
+<p><code>select @@tx_isolation;</code></p>
+<h2 id="tx-isolation-1"><a href="#tx-isolation-1" class="headerlink" title="@@tx_isolation"></a>@@tx_isolation</h2><p>REPEATABLE-READ</p>
+<p>c1,c2:<code>start transaction;</code></p>
+<p>c2:</p>
+<p><code>update t_user set money=0 where uid =1;</code> </p>
+<p>c1: 发生脏读</p>
+<p><code>select * from t_user;</code></p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="不可重复读"><a href="#不可重复读" class="headerlink" title="不可重复读"></a>不可重复读</h2><p>继续跟上:c1,c2 :<code>rollback</code></p>
+<p>c1: <code>set session transaction isolation level read committed;</code></p>
+<p><code>select * from t_user;</code></p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>c2: <code>update t_user set money=0 where uid=1;</code></p>
+<p>c1: <code>select * from t_user;</code>(未出现脏读:即读未提交)</p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>c2: <code>commit;</code></p>
+<p>c1: <code>select * from t_user;</code>(出现不可重复读:即读已提交)</p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="幻读"><a href="#幻读" class="headerlink" title="幻读"></a>幻读</h2><p>c1: <code>set session transaction isolation level repeatable read;</code></p>
+<p>c1,c2:<code>start transaction;</code></p>
+<p>c1:<code>select * from t_user;</code></p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>c2:<code>insert into t_user (uid,money) values (5,5);</code></p>
+<p><code>commit;</code></p>
+<p>c1:<code>select * from t_user;</code>(未出现不可重复读)</p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>c1:<code>insert into t_user (uid,money) values (5,7);</code></p>
+<p><code>ERROR 1062 (23000): Duplicate entry &#39;5&#39; for key &#39;PRIMARY&#39;</code></p>
+<p>c1:<code>select * from t_user;</code>(出现幻读)</p>
+<table>
+<thead>
+<tr>
+<th>uid</th>
+<th>money</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
     
     
     
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="Sawyer wechat" style="width: 200px; max-width: 100%;">
+    <div>subscribe my public wechat account</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>多谢支持！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Sawyer Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/14/指针是什么/" rel="next" title="指针是什么">
+                <i class="fa fa-chevron-left"></i> 指针是什么
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -360,8 +737,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -439,6 +825,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语句"><span class="nav-number">1.</span> <span class="nav-text">基本语句</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#各个级别会出现的问题"><span class="nav-number">2.</span> <span class="nav-text">各个级别会出现的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">3.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脏读"><span class="nav-number">3.1.</span> <span class="nav-text">脏读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-isolation"><span class="nav-number">3.2.</span> <span class="nav-text">@@tx_isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tx-isolation-1"><span class="nav-number">3.3.</span> <span class="nav-text">@@tx_isolation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不可重复读"><span class="nav-number">3.4.</span> <span class="nav-text">不可重复读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#幻读"><span class="nav-number">3.5.</span> <span class="nav-text">幻读</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
