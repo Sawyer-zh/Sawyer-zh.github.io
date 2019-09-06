@@ -304,6 +304,427 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/09/06/Cache/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/06/Cache/" itemprop="url">Lumen中的Cache</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T23:28:50+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码分析/" itemprop="url" rel="index">
+                    <span itemprop="name">源码分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>看Lumen源码的时候，在<code>bootstrap.php</code>里面并未看到注册<code>cache</code>相关的代码，那为什么<code>Cache::get()</code>可以直接使用呢？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/06/Cache/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/08/16/meituan-spider/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/16/meituan-spider/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-16T19:21:03+08:00">
+                2019-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="初步尝试"><a href="#初步尝试" class="headerlink" title="初步尝试"></a>初步尝试</h2><h3 id="找相应数据对应的页面-app-小程序-网站…"><a href="#找相应数据对应的页面-app-小程序-网站…" class="headerlink" title="找相应数据对应的页面(app,小程序,网站…)"></a>找相应数据对应的页面(app,小程序,网站…)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://bj.meituan.com/meishi/c20003/pn1/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// api</span><br><span class="line">http://bj.meituan.com/meishi/api/poi/getPoiList?cityName=北京&amp;cateId=20003&amp;areaId=0&amp;sort=&amp;dinnerCountAttrId=&amp;page=2&amp;userId=&amp;uuid=f0996a7a0ad84f0392de.1565774935.1.0.0&amp;platform=1&amp;partner=126&amp;originUrl=http://bj.meituan.com/meishi/c20003/pn2/&amp;riskLevel=1&amp;optimusCode=10&amp;_token=eJyNT8mum0AQ/Je5GnmGbWAs5YABWyReMTxiPflgMBgw++ohyr9nkPIOuUVqqZYulbp/gcZ6gBWPEEGIA0PYgBXgl2iJAQe6lm1kLKsKL2AZK4QDwb8eQQIH/ObDAKtPRUUckchtNmymP3kiII5HKrpxX1wWbpwgsZlTFguBuOuqFYR+uszDpOvvxTIoc8h4GycwEBBCIqwKAbJz/icKWHHuzMUSFjkBS7Pxmg2G97/Yfek9e5YVt8mzYCz8Pj5Shz++De1s9wsau52ibMfLsz/r/tUzsZFqpkmEITjDtn1YorUNL6KmT8+TOB6aOlS9gozyVV8vHmvfTNwxMDTrcD39VNUrNRQCC34B911hLWya5DzV4L6KiEn7t1Hj6EW35bmOkimlJOveUR79gC7m3a3ajSNN3Q3vZ+GwqYao</span><br></pre></td></tr></table></figure>
+<h2 id="分析链接相关参数"><a href="#分析链接相关参数" class="headerlink" title="分析链接相关参数"></a>分析链接相关参数</h2><p>尝试：</p>
+<ul>
+<li>直接请求</li>
+<li>修改分页等参数请求</li>
+</ul>
+<p>都能成功！！！</p>
+<h2 id="问题以及解决方案"><a href="#问题以及解决方案" class="headerlink" title="问题以及解决方案"></a>问题以及解决方案</h2><h3 id="token时效太短"><a href="#token时效太短" class="headerlink" title="token时效太短"></a>token时效太短</h3><p>token生成规则:</p>
+<ul>
+<li>生成签名</li>
+<li>生成token</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> $queryArr= [</span><br><span class="line">    <span class="string">"cityName"</span>=&gt;<span class="string">"北京"</span>, <span class="comment">// var</span></span><br><span class="line">    <span class="string">"cateId"</span>=&gt; <span class="string">"17"</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"areaId"</span>=&gt; <span class="string">"0"</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"sort"</span>=&gt;<span class="string">""</span>,</span><br><span class="line">    <span class="string">"dinnerCountAttrId"</span>=&gt;<span class="string">""</span>,</span><br><span class="line">    <span class="string">"page"</span>=&gt;<span class="string">"2"</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"userId"</span>=&gt;<span class="string">""</span>,</span><br><span class="line">    <span class="string">"uuid"</span>=&gt;<span class="string">"8ab42457-ae82-4f23-aef5-12eef071b42d"</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"platform"</span>=&gt;<span class="string">"1"</span>,</span><br><span class="line">    <span class="string">"partner"</span>=&gt;<span class="string">"126"</span>,</span><br><span class="line">    <span class="string">"originUrl"</span>=&gt;<span class="string">"http://bj.meituan.com/meishi/c17/pn2/"</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"riskLevel"</span>=&gt;<span class="string">"1"</span>,</span><br><span class="line">    <span class="string">"optimusCode"</span>=&gt;<span class="string">"10"</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> $tokenArr = [</span><br><span class="line">    <span class="string">"rId"</span>=&gt;<span class="number">100900</span>,</span><br><span class="line">    <span class="string">"ver"</span>=&gt;<span class="string">"1.0.6"</span>,</span><br><span class="line">    <span class="string">"ts"</span>=&gt;<span class="number">1563631753444</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"cts"</span>=&gt;<span class="number">1563631753604</span>, <span class="comment">//</span></span><br><span class="line">    <span class="string">"brVD"</span>=&gt;[ <span class="number">834</span>,<span class="number">949</span> ],</span><br><span class="line">    <span class="string">"brR"</span>=&gt;[</span><br><span class="line">        [<span class="number">1920</span>,<span class="number">1080</span>],</span><br><span class="line">        [<span class="number">1920</span>,<span class="number">1052</span>],</span><br><span class="line">        <span class="number">24</span>,</span><br><span class="line">        <span class="number">24</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"bI"</span>=&gt;[</span><br><span class="line">        <span class="string">"http://bj.meituan.com/meishi/c17/pn2/"</span>, <span class="comment">//</span></span><br><span class="line">        <span class="string">"http://bj.meituan.com/meishi/c17/pn1/"</span>,<span class="comment">//</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"mT"</span>=&gt;[],</span><br><span class="line">    <span class="string">"kT"</span>=&gt;[],</span><br><span class="line">    <span class="string">"aT"</span>=&gt;[],</span><br><span class="line">    <span class="string">"tT"</span>=&gt;[],</span><br><span class="line">    <span class="string">"aM"</span>=&gt;<span class="string">""</span>,</span><br><span class="line">    <span class="string">"sign"</span>=&gt;<span class="string">''</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">genSign</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $queryArr = <span class="keyword">$this</span>-&gt;queryArr;</span><br><span class="line"></span><br><span class="line">    ksort($queryArr);</span><br><span class="line"></span><br><span class="line">    $ret = [];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">foreach</span> ($queryArr <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">        $ret[] = <span class="string">"$k=$v"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $ret = join(<span class="string">'&amp;'</span>, $ret);</span><br><span class="line"></span><br><span class="line">    $ret = <span class="string">'"'</span>.$ret.<span class="string">'"'</span>;</span><br><span class="line"></span><br><span class="line">    $signCal = base64_encode(zlib_encode($ret, ZLIB_ENCODING_DEFLATE));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;sign = $signCal;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $signCal;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$signCal = base64_encode(zlib_encode($ret, ZLIB_ENCODING_DEFLATE));</span><br><span class="line"></span><br><span class="line">$tokenCal = base64_encode(zlib_encode(json_encode($tokenArr, JSON_UNESCAPED_SLASHES), ZLIB_ENCODING_DEFLATE));</span><br></pre></td></tr></table></figure>
+<h3 id="403错误"><a href="#403错误" class="headerlink" title="403错误"></a>403错误</h3><p>更换uuid</p>
+<h3 id="返回空内容-跳转到图形验证码界面"><a href="#返回空内容-跳转到图形验证码界面" class="headerlink" title="返回空内容,跳转到图形验证码界面"></a>返回空内容,跳转到图形验证码界面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://verify.meituan.com/v2/web/general_page?action=spiderindefence&amp;requestCode=6394e74446ec4ad7bb0f546c7c0f9db1&amp;platform=1000&amp;adaptor=auto&amp;succCallbackUrl=https%3A%2F%2Foptimus-mtsi.meituan.com%2Foptimus%2FverifyResult%3ForiginUrl%3Dhttp%253A%252F%252Fbj.meituan.com%252Fmeishi%252Fc11%252F</span><br></pre></td></tr></table></figure>
+<p>输入验证码</p>
+<h2 id="结论及建议"><a href="#结论及建议" class="headerlink" title="结论及建议"></a>结论及建议</h2><h3 id="爬数据关键"><a href="#爬数据关键" class="headerlink" title="爬数据关键:"></a>爬数据关键:</h3><ul>
+<li>找到正确完整的数据源</li>
+<li>尝试</li>
+</ul>
+<h3 id="反爬虫策略最关键点"><a href="#反爬虫策略最关键点" class="headerlink" title="反爬虫策略最关键点:"></a>反爬虫策略最关键点:</h3><ul>
+<li>签名</li>
+<li>IP和图形验证码的配合</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/08/14/promise/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sawyer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Enjoy coding">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/14/promise/" itemprop="url">从小程序的wx.request到js处理异步操作的方法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-14T20:33:59+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="问题由来–回调地狱"><a href="#问题由来–回调地狱" class="headerlink" title="问题由来–回调地狱"></a>问题由来–回调地狱</h1><p>先看一个例子:小程序检查session_key是否过期，登录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">wx.checkSession(</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    &#125;,</span><br><span class="line">    fail: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        wx.login(&#123;</span><br><span class="line">            success: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">                wx.request(&#123;</span><br><span class="line">                    data:&#123;&#125;,</span><br><span class="line">                    success: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    &#125;,</span><br><span class="line">                    fail: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;,</span><br><span class="line">            fail: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/hell.jpeg" alt="回调地狱"></p>
+<p>优点:</p>
+<ul>
+<li>比较直接</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>影响可读性</li>
+<li>不利于维护</li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/04/19/事务隔离级别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1247,422 +1668,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/01/09/增长黑客/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sawyer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Enjoy coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/09/增长黑客/" itemprop="url">增长黑客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-09T11:39:03+08:00">
-                2019-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/产品思维/" itemprop="url" rel="index">
-                    <span itemprop="name">产品思维</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>平时都是作为方案的实现者,最近boss让我思考一下数据分析框架驱动产品,让我来出方案.我…对,我蒙了…然后副总转手就扔来一本失传已久的pdf–增长黑客<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/09/增长黑客/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2019/01/08/php源码阅读/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sawyer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Enjoy coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/php源码阅读/" itemprop="url">php源码阅读</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-08T07:37:50+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Saywer-zh.github.io/2018/12/29/linux一些命令/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Sawyer">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Enjoy coding">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/29/linux一些命令/" itemprop="url">linux一些命令</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-29T14:02:11+08:00">
-                2018-12-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>平时用到的,感觉会忘记的</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/29/linux一些命令/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1710,7 +1720,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1732,7 +1742,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
