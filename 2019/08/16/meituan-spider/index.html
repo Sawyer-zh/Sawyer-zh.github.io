@@ -100,7 +100,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="PHP,爬虫,">
 
 
 
@@ -111,18 +111,18 @@
 
 
 
-<meta name="description" content="初步尝试找相应数据对应的页面(app,小程序,网站…)1http://bj.meituan.com/meishi/c20003/pn1/ 12// apihttp://bj.meituan.com/meishi/api/poi/getPoiList?cityName=北京&amp;amp;cateId=20003&amp;amp;areaId=0&amp;amp;sort=&amp;amp;dinnerCountAttrId=&amp;">
-<meta name="keywords" content="IT,互联网">
+<meta name="description" content="最近要采集美团网上的商家数据放到自己库里以供用户查找附近商家">
+<meta name="keywords" content="PHP,爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Enjoy coding">
+<meta property="og:title" content="爬取美团数据遇到的问题以及解决思路">
 <meta property="og:url" content="http://Saywer-zh.github.io/2019/08/16/meituan-spider/index.html">
 <meta property="og:site_name" content="Enjoy coding">
-<meta property="og:description" content="初步尝试找相应数据对应的页面(app,小程序,网站…)1http://bj.meituan.com/meishi/c20003/pn1/ 12// apihttp://bj.meituan.com/meishi/api/poi/getPoiList?cityName=北京&amp;amp;cateId=20003&amp;amp;areaId=0&amp;amp;sort=&amp;amp;dinnerCountAttrId=&amp;">
+<meta property="og:description" content="最近要采集美团网上的商家数据放到自己库里以供用户查找附近商家">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-08-16T11:21:03.099Z">
+<meta property="og:updated_time" content="2019-09-06T03:16:47.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Enjoy coding">
-<meta name="twitter:description" content="初步尝试找相应数据对应的页面(app,小程序,网站…)1http://bj.meituan.com/meishi/c20003/pn1/ 12// apihttp://bj.meituan.com/meishi/api/poi/getPoiList?cityName=北京&amp;amp;cateId=20003&amp;amp;areaId=0&amp;amp;sort=&amp;amp;dinnerCountAttrId=&amp;">
+<meta name="twitter:title" content="爬取美团数据遇到的问题以及解决思路">
+<meta name="twitter:description" content="最近要采集美团网上的商家数据放到自己库里以供用户查找附近商家">
 
 
 
@@ -158,7 +158,7 @@
 
 
 
-  <title> | Enjoy coding</title>
+  <title>爬取美团数据遇到的问题以及解决思路 | Enjoy coding</title>
   
 
 
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">爬取美团数据遇到的问题以及解决思路</h1>
         
 
         <div class="post-meta">
@@ -333,7 +333,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-16T19:21:03+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-16T23:28:50+08:00">
                 2019-08-16
               </time>
             
@@ -343,6 +343,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/奇葩案例/" itemprop="url" rel="index">
+                    <span itemprop="name">奇葩案例</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -371,7 +393,9 @@
       
 
       
-        <h2 id="初步尝试"><a href="#初步尝试" class="headerlink" title="初步尝试"></a>初步尝试</h2><h3 id="找相应数据对应的页面-app-小程序-网站…"><a href="#找相应数据对应的页面-app-小程序-网站…" class="headerlink" title="找相应数据对应的页面(app,小程序,网站…)"></a>找相应数据对应的页面(app,小程序,网站…)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://bj.meituan.com/meishi/c20003/pn1/</span><br></pre></td></tr></table></figure>
+        <p>最近要采集美团网上的商家数据放到自己库里以供用户查找附近商家</p>
+<a id="more"></a>
+<h2 id="初步尝试"><a href="#初步尝试" class="headerlink" title="初步尝试"></a>初步尝试</h2><h3 id="找相应数据对应的页面-app-小程序-网站…"><a href="#找相应数据对应的页面-app-小程序-网站…" class="headerlink" title="找相应数据对应的页面(app,小程序,网站…)"></a>找相应数据对应的页面(app,小程序,网站…)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://bj.meituan.com/meishi/c20003/pn1/</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// api</span><br><span class="line">http://bj.meituan.com/meishi/api/poi/getPoiList?cityName=北京&amp;cateId=20003&amp;areaId=0&amp;sort=&amp;dinnerCountAttrId=&amp;page=2&amp;userId=&amp;uuid=f0996a7a0ad84f0392de.1565774935.1.0.0&amp;platform=1&amp;partner=126&amp;originUrl=http://bj.meituan.com/meishi/c20003/pn2/&amp;riskLevel=1&amp;optimusCode=10&amp;_token=eJyNT8mum0AQ/Je5GnmGbWAs5YABWyReMTxiPflgMBgw++ohyr9nkPIOuUVqqZYulbp/gcZ6gBWPEEGIA0PYgBXgl2iJAQe6lm1kLKsKL2AZK4QDwb8eQQIH/ObDAKtPRUUckchtNmymP3kiII5HKrpxX1wWbpwgsZlTFguBuOuqFYR+uszDpOvvxTIoc8h4GycwEBBCIqwKAbJz/icKWHHuzMUSFjkBS7Pxmg2G97/Yfek9e5YVt8mzYCz8Pj5Shz++De1s9wsau52ibMfLsz/r/tUzsZFqpkmEITjDtn1YorUNL6KmT8+TOB6aOlS9gozyVV8vHmvfTNwxMDTrcD39VNUrNRQCC34B911hLWya5DzV4L6KiEn7t1Hj6EW35bmOkimlJOveUR79gC7m3a3ajSNN3Q3vZ+GwqYao</span><br></pre></td></tr></table></figure>
 <h2 id="分析链接相关参数"><a href="#分析链接相关参数" class="headerlink" title="分析链接相关参数"></a>分析链接相关参数</h2><p>尝试：</p>
 <ul>
@@ -442,6 +466,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+        </div>
       
 
       
@@ -567,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">30</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
