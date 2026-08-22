@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Enjoy coding 
-subtitle: Sawyer's blog
-description: the ability to see the machine as more than when you were first led up to it, that you can make it more.
-keywords: IT,互联网
+title: Sawyer's Lab
+subtitle: 软件开发、系统运维与个人项目
+description: Sawyer 的个人网站，记录软件开发、系统运维、呼叫中心和个人项目实践。
+keywords: Java,PHP,Linux,Vue,呼叫中心,软件开发
 author: Sawyer
 language: zh
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://Saywer-zh.github.io
+url: https://sawyer007.duckdns.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -49,7 +49,7 @@ highlight:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: blog
   per_page: 10
   order_by: -date
   

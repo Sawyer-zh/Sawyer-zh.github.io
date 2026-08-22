@@ -93,6 +93,8 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
+  blog: /blog/ || book
+  projects: /projects/ || code
   about: /about/ || user
   tags: /tags/ || tags
   categories: /categories/ || th
@@ -128,7 +130,6 @@ scheme: Muse
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
   GitHub: https://github.com/Sawyer-zh || github
-  E-Mail: mailto:254091355@qq.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
