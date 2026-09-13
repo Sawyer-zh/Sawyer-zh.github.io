@@ -16,6 +16,11 @@ All public pages are maintained in this repository:
 | SiteProof | `source/siteproof/` | `/siteproof/` |
 | Last Done | `source/last-done/` | `/last-done/` |
 | Row Count | `source/row-count/` | `/row-count/` |
+| Task Hours | `source/task-hours/` | `/task-hours/` |
+| Steep Rounds | `source/steep-rounds/` | `/steep-rounds/` |
+| Ready List | `source/ready-list/` | `/ready-list/` |
+| Set Rest | `source/set-rest/` | `/set-rest/` |
+| Park Tick | `source/park-tick/` | `/park-tick/` |
 
 Each product has `index.html`, `support/index.html` and `privacy/index.html`.
 Public origin: https://sawyer007.duckdns.org . Advertising seller declaration: `source/app-ads.txt`.

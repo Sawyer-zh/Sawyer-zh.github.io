@@ -27,6 +27,11 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - "park-tick/**"
+  - "set-rest/**"
+  - "ready-list/**"
+  - "steep-rounds/**"
+  - "task-hours/**"
   - court-score/**
   - pocket-draw/**
   - silent-stage/**

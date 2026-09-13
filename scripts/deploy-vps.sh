@@ -6,7 +6,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 npm run build
-for product in court-score pocket-draw silent-stage delivery-ledger siteproof last-done row-count; do
+for product in court-score pocket-draw silent-stage delivery-ledger siteproof last-done row-count task-hours steep-rounds ready-list set-rest park-tick; do
   for page in index.html support/index.html privacy/index.html; do
     test -s "public/$product/$page"
   done
