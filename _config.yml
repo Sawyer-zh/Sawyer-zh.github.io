@@ -27,6 +27,12 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
+  - court-score/**
+  - pocket-draw/**
+  - silent-stage/**
+  - delivery-ledger/**
+  - last-done/**
+  - row-count/**
 
 # Writing
 new_post_name: :title.md # File name of new posts

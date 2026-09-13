@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "hexo clean && hexo generate",
-    "serve": "hexo server"
+    "serve": "hexo server",
+    "deploy:vps": "bash scripts/deploy-vps.sh"
   },
   "hexo": {
     "version": "6.3.0"
