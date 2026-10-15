@@ -8,6 +8,7 @@ a:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
 .brand{color:var(--ink);font-weight:750;font-size:21px;text-decoration:none}
 .nav-links{display:flex;flex-wrap:wrap;gap:24px}
 .nav-links a{text-decoration:none;font-size:16px}
+.nav-links a[aria-current=page]{color:var(--ink);font-weight:700;text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:7px}
 main{max-width:1120px;margin:auto;padding:64px 28px 80px}
 main>section+section{margin-top:90px}
 h1,h2{line-height:1.18;letter-spacing:-.035em}
@@ -28,7 +29,10 @@ p{max-width:68ch}
 .watch-section{background:#e9eee5;border-radius:30px;padding:40px}
 .article-page{max-width:800px}
 .article-page h1{font-size:clamp(40px,6vw,60px)}
-.article-page h2{font-size:29px;margin-top:48px}
+.article-page>.lead{margin-bottom:12px}
+.subpage-note{color:var(--muted);font-size:15px;margin-bottom:36px}
+.article-page h2{font-size:28px;background:var(--card);border:1px solid #e5e2d8;border-bottom:0;border-radius:24px 24px 0 0;margin:18px 0 0;padding:24px 28px 0}
+.article-page h2+p{background:var(--card);border:1px solid #e5e2d8;border-top:0;border-radius:0 0 24px 24px;margin:0 0 18px;padding:10px 28px 26px;max-width:none}
 .article-page p{margin-top:0}
 footer{border-top:1px solid #e4ddc9;padding:30px 28px;text-align:center;color:var(--muted);font-size:15px}
-@media(max-width:740px){main{padding:42px 22px 64px}main>section+section{margin-top:68px}.hero,.watch-section{grid-template-columns:1fr;gap:32px}.hero .phone-shot{max-width:270px}.watch-section{padding:28px}.watch-section .phone-shot{max-width:270px}.feature-grid{grid-template-columns:1fr}.site-header nav{padding:16px 22px}}
+@media(max-width:740px){main{padding:42px 22px 64px}main>section+section{margin-top:68px}.hero,.watch-section{grid-template-columns:1fr;gap:32px}.hero .phone-shot{max-width:270px}.watch-section{padding:28px}.watch-section .phone-shot{max-width:270px}.feature-grid{grid-template-columns:1fr}.site-header nav{padding:16px 22px}.article-page h2{padding:22px 22px 0}.article-page h2+p{padding:10px 22px 24px}}
